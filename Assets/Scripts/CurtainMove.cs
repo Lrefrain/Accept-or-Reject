@@ -6,6 +6,7 @@ public class CurtainMove : MonoBehaviour
 {
 
     public bool isCurtainOpen = false;
+    private float curtainSpeed = 500f;
     void Start()
     {
 
@@ -23,8 +24,8 @@ public class CurtainMove : MonoBehaviour
 
     public void OpenCurtain()
     {
-        transform.position = transform.position + new Vector3(0, -1f, 0);
-        if(transform.position.y < 0f)
+        transform.position = transform.position + new Vector3(0f, -curtainSpeed * Time.smoothDeltaTime, 0f);
+        if(transform.position.y < -400f)
         {
             isCurtainOpen = false;
         }
