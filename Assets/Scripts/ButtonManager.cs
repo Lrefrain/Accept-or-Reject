@@ -9,11 +9,14 @@ public class ButtonManager : MonoBehaviour
 
     public GameObject annoyedAmon;
 
+    public Tools tools;
+
 
     void Start()
     {
         happyAmon.SetActive(false);
         annoyedAmon.SetActive(false);
+        tools = gameObject.GetComponent<Tools>();
     }
 
     // Update is called once per frame
@@ -27,6 +30,7 @@ public class ButtonManager : MonoBehaviour
         Debug.Log("AcceptClick");
         curtain.GetComponent<CurtainMove>().isCurtainOpen = true;
         happyAmon.SetActive(true);
+        tools.ApplyTool("BigWeak");
     }
 
     public void RejectClick()
@@ -34,5 +38,6 @@ public class ButtonManager : MonoBehaviour
         Debug.Log("RejectClick");
         curtain.GetComponent<CurtainMove>().isCurtainOpen = false;
         annoyedAmon.SetActive(true);
+        tools.ApplyTool("SmallWeak");
     }
 }

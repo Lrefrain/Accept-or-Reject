@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class BackgroundMove : MonoBehaviour
 {
-    
-    [Header("移动速度")]
-    public float MoveSpeed = 0.02f;
-
-    [Header("移动距离")]
-    public Vector3 MoveDistance = new Vector3(220f, 260f, 0f);
+    private float MoveSpeed = 0.02f;
+    private Vector3 MoveDistance = new Vector3(-220f, 0f, 0f);
 
     private Vector3 startPos;
-    private Vector3 targetPos;  
+    private Vector3 targetPos;
 
     // Start is called before the first frame update
     void Start()
