@@ -29,7 +29,7 @@ public class BackgroundMove : MonoBehaviour
     void Update()
     {
 
-         transform.position = Vector3.Lerp(startPos, targetPos, Mathf.PingPong(Time.time * MoveSpeed, 1));
+        transform.position = Vector3.Lerp(startPos, targetPos, Mathf.PingPong(Time.time * MoveSpeed, 1));
         
     }
 }

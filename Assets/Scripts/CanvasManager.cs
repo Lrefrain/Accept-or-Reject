@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
+
+    public GiftboxMove giftboxMove;
+    
     void Start()
     {
         
@@ -15,13 +18,13 @@ public class CanvasManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameObject.Find("Giftbox").GetComponent<GiftboxMove>().boxState == 2)
+        if(giftboxMove.boxState == 2)
         {
             transform.GetChild(1).gameObject.SetActive(true);
             transform.GetChild(2).gameObject.SetActive(true);
             transform.GetChild(3).gameObject.SetActive(true);
         }
-        else if(GameObject.Find("Giftbox").GetComponent<GiftboxMove>().boxState == 3)
+        else if(giftboxMove.boxState == 3)
         {
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(false);

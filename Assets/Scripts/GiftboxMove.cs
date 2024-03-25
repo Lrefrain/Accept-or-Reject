@@ -6,16 +6,20 @@ public class GiftboxMove : MonoBehaviour
 {
     public GameObject annoyedAmon;      
     public GameObject happyAmon;
-    public float timer = 5f;
+    public float timer;
     public bool isBoxChosen = false;
 
     public int boxState = 0;
     private float boxbeginY = 290f;
     private float boxendY = 120f;
     private float boxSpeed = 200f;
+
+    private float boxAppearPeriod = 1f;
     private Vector3 curtainPos;
+
     void Start()
     {
+        timer = boxAppearPeriod;
         curtainPos = transform.GetChild(2).transform.position;
         happyAmon.SetActive(false);
         annoyedAmon.SetActive(false);
@@ -48,7 +52,7 @@ public class GiftboxMove : MonoBehaviour
             case 3: // box up
                 BoxUpward();
                 if(transform.position.y > boxbeginY){
-                    timer = 2f;
+                    timer = boxAppearPeriod;
                     happyAmon.SetActive(false);
                     annoyedAmon.SetActive(false);
                     transform.GetChild(2).position = curtainPos;

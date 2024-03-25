@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
-    public GameObject curtain;
+    public CurtainMove curtainMove;
     public GameObject happyAmon;
     public GameObject annoyedAmon;  
-    public GameObject giftbox;
-
+    public GiftboxMove giftboxMove;
 
     void Start()
     {
@@ -32,20 +31,22 @@ public class ButtonManager : MonoBehaviour
     public void AcceptClick()
     {
         Debug.Log("AcceptClick");
-        curtain.GetComponent<CurtainMove>().isCurtainOpen = true;
+        curtainMove.isCurtainOpen = true;
         happyAmon.SetActive(true);
-        giftbox.GetComponent<GiftboxMove>().isBoxChosen = true;
-
-        
+        ResetBox();   
     }
 
     public void RejectClick()
     {
         Debug.Log("RejectClick");
-        curtain.GetComponent<CurtainMove>().isCurtainOpen = false;
+        curtainMove.isCurtainOpen = false;
         annoyedAmon.SetActive(true);
-        giftbox.GetComponent<GiftboxMove>().isBoxChosen = true;
+        Invoke("ResetBox", 1f);
+    }
 
+    public void ResetBox()
+    {
+        giftboxMove.isBoxChosen = true;
     }
 
 
