@@ -29,8 +29,9 @@ public class ButtonManager : MonoBehaviour
     {
         Debug.Log("AcceptClick");
         curtain.GetComponent<CurtainMove>().isCurtainOpen = true;
+
         happyAmon.SetActive(true);
-        tools.ApplyTool("BigWeak");
+        tools.ApplyTool("Accept");
     }
 
     public void RejectClick()
@@ -38,6 +39,12 @@ public class ButtonManager : MonoBehaviour
         Debug.Log("RejectClick");
         curtain.GetComponent<CurtainMove>().isCurtainOpen = false;
         annoyedAmon.SetActive(true);
-        tools.ApplyTool("SmallWeak");
+        tools.ApplyTool("Reject");
+    }
+
+    public void ConfirmClick()
+    {
+        Debug.Log("ConfirmClick");
+        tools.ApplyTool("Confirm");
     }
 }

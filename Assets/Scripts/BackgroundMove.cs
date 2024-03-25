@@ -5,10 +5,11 @@ using UnityEngine;
 public class BackgroundMove : MonoBehaviour
 {
     private float MoveSpeed = 0.02f;
-    private Vector3 MoveDistance = new Vector3(-220f, 0f, 0f);
+    private Vector3 MoveDistance = new Vector3(-200, 0f, 0f);
 
     private Vector3 startPos;
     private Vector3 targetPos;
+    private float lst = -0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,10 @@ public class BackgroundMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-         transform.position = Vector3.Lerp(startPos, targetPos, Mathf.PingPong(Time.time * MoveSpeed, 1));
-        
+        transform.position += MoveDistance * Time.deltaTime;
+        if (Time.time - lst > 0.3f) {
+            lst = Time.time;
+            transform.position = startPos;
+        }
     }
 }

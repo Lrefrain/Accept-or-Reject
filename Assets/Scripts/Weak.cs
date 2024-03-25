@@ -7,9 +7,11 @@ public class Weak : MonoBehaviour
     public float bounds = 250f, speed = 80f, direction = 1f;
     public int HP = 2, count = 0;
     public Vector3 upbounds, lowbounds;
+    public Tools tool;
     // Start is called before the first frame update
     void Start()
     {
+        tool = GameObject.Find("ButtonManager").GetComponent<Tools>();
         upbounds = transform.position + new Vector3(0, bounds / 2f, 0);
         lowbounds = transform.position + new Vector3(0, -bounds / 2f, 0);
     }
@@ -17,6 +19,7 @@ public class Weak : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.localScale = (new Vector3(0.5f, 0.05f, 1.0f)) * tool.weakScale;
         if (HP == count) {
             ++Camera.main.GetComponent<Wall>().now;
             Destroy(transform.parent.gameObject);
