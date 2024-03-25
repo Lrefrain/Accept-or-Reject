@@ -33,7 +33,10 @@ public class ButtonManager : MonoBehaviour
         Debug.Log("AcceptClick");
         curtainMove.isCurtainOpen = true;
         happyAmon.SetActive(true);
-        ResetBox();   
+        ResetBox();  
+
+        // effect after Accept:
+
     }
 
     public void RejectClick()
@@ -42,6 +45,8 @@ public class ButtonManager : MonoBehaviour
         curtainMove.isCurtainOpen = false;
         annoyedAmon.SetActive(true);
         Invoke("ResetBox", 1f);
+
+        
     }
 
     public void ResetBox()
