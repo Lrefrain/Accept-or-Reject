@@ -48,8 +48,6 @@ public class Ball : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        Debug.Log("IN");
-        
         if (heroOrEnemy == 1 && other.gameObject.CompareTag("Hero")){
             other.gameObject.GetComponent<Player>().HP --;
             other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);

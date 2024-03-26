@@ -14,11 +14,18 @@ public class Star : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.Find("Player") == null || GameObject.Find("Enemy") == null) {
+            Destroy(gameObject);
+            return ;
+        }
         player = GameObject.Find("Player").GetComponent<Player>();
         enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
         useTools = Camera.main.GetComponent<UseTools>();
         // Destroy this Star after delaySeconds.
         StartCoroutine(DestroyComponentAfterDelay(delaySeconds));
+        if (Object.ReferenceEquals(enemy, null)) {
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator DestroyComponentAfterDelay(float delaySeconds)
@@ -41,6 +48,7 @@ public class Star : MonoBehaviour
         if (heroOrEnemy == 0) {
             if (Object.ReferenceEquals(enemy, null)) {
                 Destroy(gameObject);
+                return ;
             }
             else {
                 moveDirection = (enemy.transform.position - transform.position).normalized;
@@ -49,6 +57,7 @@ public class Star : MonoBehaviour
         else {
             if (Object.ReferenceEquals(player, null)) {
                 Destroy(gameObject);
+                return ;
             }
             else {
                 moveDirection = (player.transform.position - transform.position).normalized;
