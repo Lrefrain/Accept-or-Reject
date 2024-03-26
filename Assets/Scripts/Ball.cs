@@ -6,14 +6,14 @@ public class Ball : MonoBehaviour
 {
     public float speed = 300.0f;
     public int heroOrEnemy = 0; // hero: 0, enemy: 1
-    private Vector3 moveDirection;
+    private Vector3 moveDirection, firstDirection;
     private UseTools useTools;
     private Player player;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
-        moveDirection = player.transform.position - transform.position;
+        firstDirection = (player.transform.position - transform.position).normalized;
         useTools = Camera.main.GetComponent<UseTools>();
     }
 
@@ -31,6 +31,9 @@ public class Ball : MonoBehaviour
         if (heroOrEnemy == 0) {
             moveDirection = new Vector3(1f, 0, 0);
         }
+        else {
+            moveDirection = firstDirection;
+        }
     }
 
     void GetSpeed()
@@ -45,12 +48,18 @@ public class Ball : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.CompareTag("Wall")){
+        Debug.Log("IN");
+        
+        if (heroOrEnemy == 1 && other.gameObject.CompareTag("Hero")){
+            other.gameObject.GetComponent<Player>().HP --;
+            other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);
             Destroy(gameObject);
         } 
-        else if (other.gameObject.CompareTag("Weak")){
-            Debug.Log("Hit the Weak.");
-            other.gameObject.GetComponent<Weak>().hp--;
+        
+        if (heroOrEnemy == 0 && other.gameObject.CompareTag("Enemy")){
+            other.gameObject.GetComponent<Enemy>().HP --;
+            other.gameObject.GetComponent<Enemy>().HP = Mathf.Max(0, other.gameObject.GetComponent<Enemy>().HP);
+            Debug.Log(other.gameObject.GetComponent<Enemy>().HP);
             Destroy(gameObject);
         }
     }

@@ -5,14 +5,17 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    // public Weapon weapon = null;
+    private UseTools useTools;
     public GameObject ballPrefab;
+    public GameObject starPrefab;
     public TextMeshProUGUI cdBar;
-    private float lastShootTime, shootCD = 0.5f, speed = 30f;
+    public int HP = 3;
+    private float lastShootTime, shootCD = 0.5f, speed = 100f;
     // Start is called before the first frame update
     void Start()
     {
         lastShootTime = -3f;
+        useTools = Camera.main.GetComponent<UseTools>();
     }
 
     // Update is called once per frame
@@ -23,7 +26,12 @@ public class Player : MonoBehaviour
         // }
         ShootControl();
         MoveControl();
+        
+        if (HP == 0) {
+            Destroy(gameObject);
+        }
     }
+    
     private void MoveControl()
     {
         // add bounds
@@ -32,17 +40,25 @@ public class Player : MonoBehaviour
         Vector3 moveDirection = new Vector3(movex, movey, 0).normalized;
         transform.position += moveDirection * speed * Time.deltaTime;
     }
+
     private void ShootControl()
     {
         if (Time.time - lastShootTime > shootCD) {
-            cdBar.text = "Ball:Ready";
+            cdBar.text = "Bullet:Ready";
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
                 lastShootTime = Time.time;
                 GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+                bullet.GetComponent<Ball>().heroOrEnemy = 0;     // mark as a hero bullet
+
+                if (useTools.heroHasStar) {
+                    GameObject star = Instantiate(starPrefab, transform.position, Quaternion.identity);
+                    star.GetComponent<Star>().heroOrEnemy = 0;     // mark as a hero bullet
+                }
                 cdBar.text = "";
             }
         }
     }
+
     bool IsPointerOverButton()
     {
         Vector3 mousePosition = Input.mousePosition;

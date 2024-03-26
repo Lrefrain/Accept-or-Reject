@@ -13,10 +13,11 @@ public class UseTools : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetForBegin();
+        SetSpeedForBegin();
+        SetBulletForBegin();
         descriptions = new string[10];
         descriptions[0] = "The World!";
-        descriptions[1] = "Weakness Bigger!";
+        descriptions[1] = "Get Star Bullet!";
         textMP = text.GetComponent<TextMeshProUGUI>();
     }
 
@@ -37,7 +38,7 @@ public class UseTools : MonoBehaviour
                 StopEnemy();
                 break;
             case 1:
-                BigWeak();
+                AddStarBullet();
                 break;
         }
 
@@ -50,36 +51,54 @@ public class UseTools : MonoBehaviour
 
     public float delaySeconds = 8f; // buff/debuff 延迟时间
 
-    public float enemyBallSpeed = 300f;
+// StopEnemy ==========================================
+    public float enemyBallSpeed = 200f;
     public float heroBallSpeed = 300f;
-    public float enemyStarSpeed = 150f;
-    public float heroStarSpeed = 150f;
+    public float enemyStarSpeed = 60f;
+    public float heroStarSpeed = 80f;
     public float enemySpeed = 50f;
 
-    void SetForBegin()
+    void SetSpeedForBegin()
     {
-        enemyBallSpeed = 300f;
+        enemyBallSpeed = 200f;
         heroBallSpeed = 300f;
-        enemyStarSpeed = 150f;
-        heroStarSpeed = 150f;
+        enemyStarSpeed = 60f;
+        heroStarSpeed = 80f;
         enemySpeed = 50f;
     }
+
     private void StopEnemy()
     {
         enemyBallSpeed = 0f;
         enemyStarSpeed = 0f;
         enemySpeed = 0f;
-        StartCoroutine(ChangeValueAfterDelay()); // 开始协程
+        StartCoroutine(ChangeValueAfterDelay(delaySeconds)); // 开始协程
     }
-    IEnumerator ChangeValueAfterDelay()
+
+    IEnumerator ChangeValueAfterDelay(float delaySeconds)
     {
         yield return new WaitForSeconds(delaySeconds);
-        SetForBegin();
+        SetSpeedForBegin();
     }
 
+// AddStarBullet ==========================================
 
-    private void BigWeak()
+    public bool heroHasStar = false;
+
+    private void AddStarBullet()
     {
-        
+        heroHasStar = true;
+        StartCoroutine(ChangeBulletAfterDelay(delaySeconds)); // 开始协程
+    }
+    
+    void SetBulletForBegin()
+    {
+        heroHasStar = false;
+    }
+
+    IEnumerator ChangeBulletAfterDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        SetBulletForBegin();
     }
 }

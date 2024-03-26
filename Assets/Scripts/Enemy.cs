@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject ballPrefab;
+    public GameObject starPrefab;
+    public int HP = 5;
     private float speed = 50f;
     private Vector3 moveDirection, moveTarget;
     private float leftX, rightX, lowY, upY;
@@ -11,9 +14,15 @@ public class Enemy : MonoBehaviour
     private CameraSupport s;
     private float eps = 1e-1f;
     private UseTools useTools;
+    private float lastShootBallTime;
+    private float lastShootStarTime;
+    private float shootBallCD = 1f;
+    private float shootStarCD = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
+        lastShootBallTime = 0f;
+        lastShootStarTime = 0f;
         s = Camera.main.GetComponent<CameraSupport>();
         GetPos();
         useTools = Camera.main.GetComponent<UseTools>();
@@ -22,10 +31,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // MoveControl();
         speed = useTools.enemySpeed;
-        Debug.Log(speed);
+        ShootControl();
         GotoNewDes();
+
+        if (HP == 0) {
+            Destroy(gameObject);
+        }
     }
     private float GetDis(Vector3 A, Vector3 B)
     {
@@ -55,5 +67,19 @@ public class Enemy : MonoBehaviour
         rightX = rightEdgeX - minRate * screenWidth;
         lowY = upEdgeY - maxRate * screenHeight;
         upY = upEdgeY - minRate * screenHeight; 
+    }
+
+    private void ShootControl()
+    {
+        if (Time.time - lastShootBallTime > shootBallCD) {
+            lastShootBallTime = Time.time;
+            GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+            bullet.GetComponent<Ball>().heroOrEnemy = 1;     // mark as an enemy bullet
+        }
+        if (Time.time - lastShootStarTime > shootStarCD) {
+            lastShootStarTime = Time.time;
+            GameObject bullet = Instantiate(starPrefab, transform.position, Quaternion.identity);
+            bullet.GetComponent<Star>().heroOrEnemy = 1;     // mark as an enemy bullet
+        }
     }
 }

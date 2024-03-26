@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class Star : MonoBehaviour
 {
-    public float speed = 300.0f;
+    public float speed = 70f;
     public int heroOrEnemy = 0; // hero: 0, enemy: 1
     private Vector3 moveDirection;
     private UseTools useTools;
     private Player player;
     private Enemy enemy;
+    private float delaySeconds = 5f;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
         enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
         useTools = Camera.main.GetComponent<UseTools>();
+        // Destroy this Star after delaySeconds.
+        StartCoroutine(DestroyComponentAfterDelay(delaySeconds));
+    }
+
+    private IEnumerator DestroyComponentAfterDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
@@ -30,10 +39,20 @@ public class Star : MonoBehaviour
     void GetDir()
     {
         if (heroOrEnemy == 0) {
-            moveDirection = enemy.transform.position - transform.position;
+            if (Object.ReferenceEquals(enemy, null)) {
+                Destroy(gameObject);
+            }
+            else {
+                moveDirection = (enemy.transform.position - transform.position).normalized;
+            }
         }
         else {
-            moveDirection = player.transform.position - transform.position;
+            if (Object.ReferenceEquals(player, null)) {
+                Destroy(gameObject);
+            }
+            else {
+                moveDirection = (player.transform.position - transform.position).normalized;
+            }
         }
     }
 
@@ -49,12 +68,15 @@ public class Star : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.gameObject.CompareTag("Wall")){
+        if (heroOrEnemy == 1 && other.gameObject.CompareTag("Hero")) {
+            other.gameObject.GetComponent<Player>().HP --;
+            other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);
             Destroy(gameObject);
         } 
-        else if (other.gameObject.CompareTag("Weak")){
-            Debug.Log("Hit the Weak.");
-            other.gameObject.GetComponent<Weak>().hp--;
+        
+        if (heroOrEnemy == 0 && other.gameObject.CompareTag("Enemy")) {
+            other.gameObject.GetComponent<Enemy>().HP --;
+            other.gameObject.GetComponent<Enemy>().HP = Mathf.Max(0, other.gameObject.GetComponent<Enemy>().HP);
             Destroy(gameObject);
         }
     }
