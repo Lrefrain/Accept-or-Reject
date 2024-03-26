@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     // public Weapon weapon = null;
     public GameObject ballPrefab;
     public TextMeshProUGUI cdBar;
-    private float lastShootTime, shootCD = 0.5f;
+    private float lastShootTime, shootCD = 0.5f, speed = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +22,21 @@ public class Player : MonoBehaviour
         //     ShootControl();
         // }
         ShootControl();
+        MoveControl();
+    }
+    private void MoveControl()
+    {
+        // add bounds
+        float movex = Input.GetAxis("Horizontal");
+        float movey = Input.GetAxis("Vertical");
+        Vector3 moveDirection = new Vector3(movex, movey, 0).normalized;
+        transform.position += moveDirection * speed * Time.deltaTime;
     }
     private void ShootControl()
     {
         if (Time.time - lastShootTime > shootCD) {
             cdBar.text = "Ball:Ready";
-            if (Input.GetMouseButtonDown(0)){
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
                 lastShootTime = Time.time;
                 GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);
                 cdBar.text = "";

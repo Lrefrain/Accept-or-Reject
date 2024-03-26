@@ -5,30 +5,36 @@ using TMPro;
 
 public class UseTools : MonoBehaviour
 {
-    public GameObject text;
+    public GameObject text, enemy;
     // public GameObject ;
     private TextMeshProUGUI textMP;
     private string[] descriptions;
+    private GameObject[] enemyBalls;
     // Start is called before the first frame update
     void Start()
     {
+        SetForBegin();
         descriptions = new string[10];
-        descriptions[0] = "Weakness Smaller!";
+        descriptions[0] = "The World!";
         descriptions[1] = "Weakness Bigger!";
         textMP = text.GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
+    // private bool tag = false;
     void Update()
     {
-        
+        // if (Time.time >= 2f && tag == false) {
+        //     StopEnemy();
+        //     tag = true;
+        // }
     }
     public void GoWork(int id)
     {
         Debug.Log("work" + id);
         switch (id){
             case 0:
-                SmallWeak();
+                StopEnemy();
                 break;
             case 1:
                 BigWeak();
@@ -41,10 +47,31 @@ public class UseTools : MonoBehaviour
         text.SetActive(true);
         textMP.text = descriptions[id];
     }
-    private void SmallWeak()
+
+    public float delaySeconds = 8f; // buff/debuff 延迟时间
+
+    public float ballSpeed = 300f;
+    public float enemySpeed = 50f;
+
+    void SetForBegin()
     {
-        
+        ballSpeed = 300f;
+        enemySpeed = 50f;
     }
+    private void StopEnemy()
+    {
+        // enemyBalls = GameObject.FindGameObjectsWithTag("Ball");
+        ballSpeed = 0f;
+        enemySpeed = 0f;
+        StartCoroutine(ChangeValueAfterDelay()); // 开始协程
+    }
+    IEnumerator ChangeValueAfterDelay()
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        SetForBegin();
+    }
+
+
     private void BigWeak()
     {
         
