@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject ballPrefab;
-    public GameObject starPrefab;
+    public GameObject ballPrefab, starPrefab;
     public int HP = 5;
     private float speed = 50f;
     private Vector3 moveDirection, moveTarget;
     private float leftX, rightX, lowY, upY;
-    private float minRate = 0.2f, maxRate = 0.5f;
+    private float minRate = 0.05f, maxRate = 0.4f;
     private CameraSupport s;
     private float eps = 1e-1f;
     private UseTools useTools;

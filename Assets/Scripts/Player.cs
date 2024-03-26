@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     private UseTools useTools;
-    public GameObject ballPrefab;
-    public GameObject starPrefab;
-    public TextMeshProUGUI cdBar;
-    public int HP = 3;
+    public GameObject ballPrefab, starPrefab;
+    public Text cdBar;
+    public int HP;
     private float lastShootTime, shootCD = 0.5f, speed = 100f;
+    private float leftX, rightX, upY, lowY, rate = 0.3f;
+    private CameraSupport s;
     // Start is called before the first frame update
     void Start()
     {
+        HP = 10;
         lastShootTime = -3f;
         useTools = Camera.main.GetComponent<UseTools>();
+        s = Camera.main.GetComponent<CameraSupport>();
+        GetBounds();
     }
 
     // Update is called once per frame
@@ -26,12 +30,33 @@ public class Player : MonoBehaviour
         // }
         ShootControl();
         MoveControl();
-        
+        CheckHP();
+        InBounds();
+    }
+    private void GetBounds()
+    {
+        leftX = s.GetWorldBound().min.x + 23;
+        float screenWidth = s.GetWorldBound().size.x;
+        rightX = leftX + rate * screenWidth;
+        upY = s.GetWorldBound().max.y - 14;
+        lowY = s.GetWorldBound().min.y + 14;
+    }
+    private void InBounds()
+    {
+        Vector3 pos = transform.position;
+        if (pos.x >= rightX) pos.x = rightX;
+        if (pos.x <= leftX) pos.x = leftX;
+        if (pos.y >= upY) pos.y = upY;
+        if (pos.y <= lowY) pos.y = lowY;
+        transform.position = pos;
+    }
+    private void CheckHP()
+    {
         if (HP == 0) {
             Destroy(gameObject);
+            Time.timeScale = 0;
         }
     }
-    
     private void MoveControl()
     {
         // add bounds

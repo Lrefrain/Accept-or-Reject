@@ -11,9 +11,11 @@ public class Star : MonoBehaviour
     private Player player;
     private Enemy enemy;
     private float delaySeconds = 5f;
+    private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = Camera.main.GetComponent<AudioManager>();
         if (GameObject.Find("Player") == null || GameObject.Find("Enemy") == null) {
             Destroy(gameObject);
             return ;
@@ -78,12 +80,14 @@ public class Star : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) 
     {
         if (heroOrEnemy == 1 && other.gameObject.CompareTag("Hero")) {
+            audioManager.ExploreSound();
             other.gameObject.GetComponent<Player>().HP --;
             other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);
             Destroy(gameObject);
         } 
         
         if (heroOrEnemy == 0 && other.gameObject.CompareTag("Enemy")) {
+            audioManager.ExploreSound();
             other.gameObject.GetComponent<Enemy>().HP --;
             other.gameObject.GetComponent<Enemy>().HP = Mathf.Max(0, other.gameObject.GetComponent<Enemy>().HP);
             Destroy(gameObject);

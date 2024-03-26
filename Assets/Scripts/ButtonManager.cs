@@ -9,6 +9,7 @@ public class ButtonManager : MonoBehaviour
     // public GameObject annoyedAmon;
 
     // public GiftboxMove giftboxMove;
+    private AudioManager audioManager;
     private Tools tools;
 
 
@@ -17,6 +18,7 @@ public class ButtonManager : MonoBehaviour
         // happyAmon.SetActive(false);
         // annoyedAmon.SetActive(false);
         tools = gameObject.GetComponent<Tools>();
+        audioManager = Camera.main.GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class ButtonManager : MonoBehaviour
 
     public void AcceptClick()
     {
+        audioManager.ClickSound();
         Debug.Log("AccpetClick");
         // curtain.GetComponent<CurtainMove>().isCurtainOpen = true;
         // happyAmon.SetActive(true);
@@ -35,6 +38,7 @@ public class ButtonManager : MonoBehaviour
 
     public void RejectClick()
     {
+        audioManager.ClickSound();
         Debug.Log("RejectClick");
         // curtain.GetComponent<CurtainMove>().isCurtainOpen = false;
         // annoyedAmon.SetActive(true);
@@ -44,6 +48,7 @@ public class ButtonManager : MonoBehaviour
 
     public void ConfirmClick()
     {
+        audioManager.ClickSound();
         Debug.Log("ConfirmClick");
         // giftboxMove.isConfirmed = true;
         tools.ApplyTool("Confirm");
