@@ -4,29 +4,24 @@ using UnityEngine;
 
 public class BackgroundMove : MonoBehaviour
 {
-    private float MoveSpeed = 0.02f;
-    private Vector3 MoveDistance = new Vector3(-200, 0f, 0f);
-
-    private Vector3 startPos;
-    private Vector3 targetPos;
-    private float lst = -0.3f;
+    private Vector3 MoveDistance = new Vector3(-20f, 0f, 0f), startPos;
+    private float lst, resetCD = 10.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         // float r = Random.Range(-45f, 45f);
         // transform.localRotation = Quaternion.AngleAxis(r, Vector3.forward);
-
         // Speed = Random.Range(5f, 10f);
         startPos = transform.position;
-        targetPos = startPos + MoveDistance;
+        lst = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += MoveDistance * Time.deltaTime;
-        if (Time.time - lst > 0.3f) {
+        if (Time.time - lst > resetCD) {
             lst = Time.time;
             transform.position = startPos;
         }
