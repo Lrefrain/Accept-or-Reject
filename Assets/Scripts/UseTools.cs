@@ -50,18 +50,24 @@ public class UseTools : MonoBehaviour
 
     public float delaySeconds = 8f; // buff/debuff 延迟时间
 
-    public float ballSpeed = 300f;
+    public float enemyBallSpeed = 300f;
+    public float heroBallSpeed = 300f;
+    public float enemyStarSpeed = 150f;
+    public float heroStarSpeed = 150f;
     public float enemySpeed = 50f;
 
     void SetForBegin()
     {
-        ballSpeed = 300f;
+        enemyBallSpeed = 300f;
+        heroBallSpeed = 300f;
+        enemyStarSpeed = 150f;
+        heroStarSpeed = 150f;
         enemySpeed = 50f;
     }
     private void StopEnemy()
     {
-        // enemyBalls = GameObject.FindGameObjectsWithTag("Ball");
-        ballSpeed = 0f;
+        enemyBallSpeed = 0f;
+        enemyStarSpeed = 0f;
         enemySpeed = 0f;
         StartCoroutine(ChangeValueAfterDelay()); // 开始协程
     }
