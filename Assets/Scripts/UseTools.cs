@@ -15,7 +15,7 @@ public class UseTools : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        delaySeconds = 8f;
+        delaySeconds = 10f;
         player = GameObject.Find("Player").GetComponent<Player>();
         SetSpeedForBegin();
         SetBulletForBegin();

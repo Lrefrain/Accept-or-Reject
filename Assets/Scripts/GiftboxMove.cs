@@ -6,7 +6,7 @@ public class GiftboxMove : MonoBehaviour
 {
     // public GameObject annoyedAmon, happyAmon;
     public bool boxUp = false;
-    private float timer, boxAppearPeriod = 10f;
+    private float timer, boxAppearPeriod = 7f;
     private int boxState = 0;
     private float boxbeginY = 200f, boxendY = 15f, boxSpeed = 200f;
     private UseTools useTools;
