@@ -9,6 +9,7 @@ TagManager:
   - Weak
   - Enemy
   - Hero
+  - Star
   layers:
   - Default
   - TransparentFX
