@@ -11,9 +11,11 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI cdBar;
     public TextMeshProUGUI hpBar;
     public int HP;
-    private float lastShootTime, shootCD = 0.5f, speed = 100f;
+    private float lastShootTime, shootCD = 0.5f;
+    public float speed = 100f;
     private float leftX, rightX, upY, lowY, rate = 0.3f;
     private CameraSupport s;
+    public bool enableShoot = true;
     // Start is called before the first frame update
     void Start()
     {

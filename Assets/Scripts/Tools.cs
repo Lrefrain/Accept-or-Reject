@@ -59,13 +59,14 @@ public class Tools : MonoBehaviour
             return;
         }
         else if (choice == "Reject") {
-            boxMove.boxUp = true;
             curtainMove.curtainUp = true;
         }
         else if (choice == "Confirm") {
-            boxMove.boxUp = true;
+            // boxMove.boxUp = true;
             useTools.GoWork(id);
         }
+        boxMove.boxUp = true;
+        useTools.BeginAll();
         ReturnGame();
     }
     private void ReturnGame()

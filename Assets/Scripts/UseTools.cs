@@ -81,9 +81,21 @@ public class UseTools : MonoBehaviour
         text.SetActive(true);
         textMP.text = descriptions[id];
     }
+// Stop and Start all for tools choice.=================
     public void StopAll()
     {
         StopEnemy();
+        // StopPlayer();
+    } 
+    public void StartAll()
+    {
+        // StopEnemy();
+        
+    }
+    private void StopPlayer()
+    {
+        player.speed = 0;
+        player.enableShoot = false;
     }
     public float delaySeconds = 8f; // buff/debuff 延迟时间
 
