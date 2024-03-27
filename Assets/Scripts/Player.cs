@@ -11,12 +11,15 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI cdBar;
     public TextMeshProUGUI hpBar;
     public int HP;
-    private float lastShootTime, shootCD = 0.5f, speed = 100f;
+    private float lastShootTime, shootCD = 0.5f;
+    public float speed;
     private float leftX, rightX, upY, lowY, rate = 0.3f;
     private CameraSupport s;
+    public bool enableShoot = true;
     // Start is called before the first frame update
     void Start()
     {
+        speed = 120f;
         HP = 10;
         lastShootTime = -3f;
         useTools = Camera.main.GetComponent<UseTools>();
@@ -78,16 +81,23 @@ public class Player : MonoBehaviour
 
     private void ShootControl()
     {
-        if (Time.time - lastShootTime > GetShootCD()) {
+        if (Time.time - lastShootTime > GetShootCD() && enableShoot) {
             cdBar.text = "Bullet:Ready";
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
                 lastShootTime = Time.time;
-                GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);
-                bullet.GetComponent<Ball>().heroOrEnemy = 0;     // mark as a hero bullet
+                Debug.Log(useTools.bulletsNum);
+                for (int i = 0; i < useTools.bulletsNum; ++i) {
+                    GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+                    bullet.GetComponent<Ball>().heroOrEnemy = 0;     // mark as a hero bullet
+                    bullet.GetComponent<Ball>().oth = i;            // mark its dir index
+                    bullet.transform.localScale *= 0.7f;
+                    Debug.Log(i);
+                }
 
                 if (useTools.heroHasStar) {
                     GameObject star = Instantiate(starPrefab, transform.position, Quaternion.identity);
                     star.GetComponent<Star>().heroOrEnemy = 0;     // mark as a hero bullet
+                    star.transform.localScale *= 0.7f;
                 }
                 cdBar.text = "";
             }

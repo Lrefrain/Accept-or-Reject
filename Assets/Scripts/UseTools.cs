@@ -11,9 +11,11 @@ public class UseTools : MonoBehaviour
     private string[] descriptions;
     private GameObject[] enemyBalls;
     private Player player;
+    public float delaySeconds; // buff/debuff 延迟时间
     // Start is called before the first frame update
     void Start()
     {
+        delaySeconds = 10f;
         player = GameObject.Find("Player").GetComponent<Player>();
         SetSpeedForBegin();
         SetBulletForBegin();
@@ -26,6 +28,8 @@ public class UseTools : MonoBehaviour
         descriptions[4] = "Increase HP by 1!";
         descriptions[5] = "Dcresase HP by 1! (if your HP > 1)";
         descriptions[6] = "Clear Screen!";
+        descriptions[7] = "Add Shizuka! (DO NOT shoot her)";
+        descriptions[8] = "Multi-Bullets!";
         textMP = text.GetComponent<TextMeshProUGUI>();
     }
 
@@ -64,6 +68,12 @@ public class UseTools : MonoBehaviour
             case 6:
                 ClearScreen();
                 break;
+            case 7:
+                AddShizuka();
+                break;
+            case 8:
+                MultiBullets();
+                break;
         }
 
     }
@@ -74,15 +84,36 @@ public class UseTools : MonoBehaviour
         textMP.text = descriptions[id];
     }
 
-    public float delaySeconds = 8f; // buff/debuff 延迟时间
-
 // StopEnemy ==========================================
     public float enemyBallSpeed = 200f;
     public float heroBallSpeed = 300f;
     public float enemyStarSpeed = 60f;
     public float heroStarSpeed = 80f;
     public float enemySpeed = 50f;
-
+    public bool enemyEnableShoot = true;
+    public void StopAll()
+    {
+        enemyBallSpeed = 0f;
+        enemyStarSpeed = 0f;
+        enemySpeed = 0f;
+        enemyEnableShoot = false;
+        player.speed = 0f;
+        player.enableShoot = false;
+    }
+    public void BeginAllFor0()
+    {
+        enemyEnableShoot = true;
+        player.speed = 120f;
+        player.enableShoot = true;
+    }
+    public void BeginAll()
+    {
+        // enemySpeed = 50f;
+        SetSpeedForBegin();
+        enemyEnableShoot = true;
+        player.speed = 120f;
+        player.enableShoot = true;
+    }
     void SetSpeedForBegin()
     {
         enemyBallSpeed = 200f;
@@ -184,5 +215,35 @@ public class UseTools : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+        
+// AddShizuka ==========================================
+
+    public GameObject ShizukaPrefab;
+
+    public void AddShizuka()
+    {
+        GameObject Shizuka = Instantiate(ShizukaPrefab, transform.position, Quaternion.identity);
+    }
+
+// MultiBullets ==========================================
+
+    public int bulletsNum = 1;
+
+    public void MultiBullets()
+    {
+        bulletsNum = 3;
+        StartCoroutine(ChangeBulletsNumAfterDelay(delaySeconds)); // 开始协程
+    }
+    
+    void SetMultiBulletsForBegin()
+    {
+        bulletsNum = 1;
+    }
+
+    IEnumerator ChangeBulletsNumAfterDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        SetMultiBulletsForBegin();
     }
 }

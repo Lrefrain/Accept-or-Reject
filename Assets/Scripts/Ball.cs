@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 {
     public float speed = 300.0f;
     public int heroOrEnemy = 0; // hero: 0, enemy: 1
+    public int oth;    // hero bullet dir index   0 mid, 1 low, 2 up
     private Vector3 moveDirection, firstDirection;
     private UseTools useTools;
     private Player player;
@@ -31,7 +32,15 @@ public class Ball : MonoBehaviour
     void GetDir()
     {
         if (heroOrEnemy == 0) {
-            moveDirection = new Vector3(1f, 0, 0);
+            if (oth == 0) {
+                moveDirection = new Vector3(1f, 0, 0);
+            }
+            else if (oth == 1) {
+                moveDirection = (new Vector3(1.732f, -1f, 0)).normalized;
+            }
+            else if (oth == 2) {
+                moveDirection = (new Vector3(1.732f, 1f, 0)).normalized;
+            }
         }
         else {
             moveDirection = firstDirection;
@@ -56,8 +65,16 @@ public class Ball : MonoBehaviour
             other.gameObject.GetComponent<Player>().HP --;
             other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);
             Destroy(gameObject);
-        } 
-        
+        }
+
+        if (heroOrEnemy == 0 && other.gameObject.CompareTag("Shizuka")) {
+            useTools.ClearScreen();
+            audioManager.ExploreSound();
+            player.HP --;
+            player.HP = Mathf.Max(0, player.HP);
+            Destroy(gameObject);
+        }
+
         if (heroOrEnemy == 0 && other.gameObject.CompareTag("Enemy")){
             audioManager.ExploreSound();
             other.gameObject.GetComponent<Enemy>().HP --;
