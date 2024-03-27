@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     private float lastShootStarTime;
     private float shootBallCD = 0.6f;
     private float shootStarCD = 1.0f;
+    private bool enableShoot = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         speed = useTools.enemySpeed;
+        enableShoot = useTools.enemyEnableShoot;
         ShootControl();
         GotoNewDes();
 
@@ -70,6 +73,7 @@ public class Enemy : MonoBehaviour
 
     private void ShootControl()
     {
+        if (!enableShoot) return;
         if (Time.time - lastShootBallTime > shootBallCD) {
             lastShootBallTime = Time.time;
             GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);

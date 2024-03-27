@@ -81,22 +81,6 @@ public class UseTools : MonoBehaviour
         text.SetActive(true);
         textMP.text = descriptions[id];
     }
-// Stop and Start all for tools choice.=================
-    public void StopAll()
-    {
-        StopEnemy();
-        // StopPlayer();
-    } 
-    public void StartAll()
-    {
-        // StopEnemy();
-        
-    }
-    private void StopPlayer()
-    {
-        player.speed = 0;
-        player.enableShoot = false;
-    }
     public float delaySeconds = 8f; // buff/debuff 延迟时间
 
 // StopEnemy ==========================================
@@ -105,7 +89,21 @@ public class UseTools : MonoBehaviour
     public float enemyStarSpeed = 60f;
     public float heroStarSpeed = 80f;
     public float enemySpeed = 50f;
-
+    public bool enemyEnableShoot = true;
+    public void StopAll()
+    {
+        StopEnemy();
+        enemyEnableShoot = false;
+        player.speed = 0;
+        player.enableShoot = false;
+    } 
+    public void BeginAll()
+    {
+        // StartEnemy();
+        enemyEnableShoot = true;
+        player.speed = 120f;
+        player.enableShoot = true;
+    }
     void SetSpeedForBegin()
     {
         enemyBallSpeed = 200f;
