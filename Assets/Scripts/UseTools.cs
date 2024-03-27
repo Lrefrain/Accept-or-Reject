@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class UseTools : MonoBehaviour
 {
-    public GameObject text, enemy;
+    public GameObject textObj, enemy;
     // public GameObject ;
-    private TextMeshProUGUI textMP;
+    private Text text;
     private string[] descriptions;
     private GameObject[] enemyBalls;
     private Player player;
@@ -26,11 +26,11 @@ public class UseTools : MonoBehaviour
         descriptions[2] = "Get Lower Shoot CD!";
         descriptions[3] = "Get Higher Shoot CD!";
         descriptions[4] = "Increase HP by 1!";
-        descriptions[5] = "Dcresase HP by 1! (if your HP > 1)";
+        descriptions[5] = "Decrease HP by 1!\n(if your HP > 1)";
         descriptions[6] = "Clear Screen!";
-        descriptions[7] = "Add Shizuka! (DO NOT shoot her)";
+        descriptions[7] = "Add Shizuka!\n(DO NOT touch her)";
         descriptions[8] = "Multi-Bullets!";
-        textMP = text.GetComponent<TextMeshProUGUI>();
+        text = textObj.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -80,11 +80,10 @@ public class UseTools : MonoBehaviour
 
     public void ShowTool(int id)
     {
-        text.SetActive(true);
-        textMP.text = descriptions[id];
+        textObj.SetActive(true);
+        text.text = descriptions[id];
     }
 
-// StopEnemy ==========================================
     public float enemyBallSpeed = 200f;
     public float heroBallSpeed = 300f;
     public float enemyStarSpeed = 60f;
@@ -122,13 +121,13 @@ public class UseTools : MonoBehaviour
         heroStarSpeed = 80f;
         enemySpeed = 50f;
     }
-
+// StopEnemy ==========================================
     private void StopEnemy()
     {
         enemyBallSpeed = 0f;
         enemyStarSpeed = 0f;
         enemySpeed = 0f;
-        StartCoroutine(ChangeValueAfterDelay(delaySeconds)); // 开始协程
+        StartCoroutine(ChangeValueAfterDelay(5f)); // 开始协程
     }
 
     IEnumerator ChangeValueAfterDelay(float delaySeconds)
@@ -232,7 +231,7 @@ public class UseTools : MonoBehaviour
 
     public void MultiBullets()
     {
-        bulletsNum = 3;
+        bulletsNum = 5;
         StartCoroutine(ChangeBulletsNumAfterDelay(delaySeconds)); // 开始协程
     }
     

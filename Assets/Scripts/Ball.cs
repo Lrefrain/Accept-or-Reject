@@ -31,15 +31,22 @@ public class Ball : MonoBehaviour
 
     void GetDir()
     {
+        float x = 0.6f;
         if (heroOrEnemy == 0) {
             if (oth == 0) {
                 moveDirection = new Vector3(1f, 0, 0);
             }
             else if (oth == 1) {
-                moveDirection = (new Vector3(1.732f, -1f, 0)).normalized;
+                moveDirection = (new Vector3(1f, -x, 0)).normalized;
             }
             else if (oth == 2) {
-                moveDirection = (new Vector3(1.732f, 1f, 0)).normalized;
+                moveDirection = (new Vector3(1f, x, 0)).normalized;
+            }
+            else if (oth == 3) {
+                moveDirection = (new Vector3(1f, -x/2, 0)).normalized;
+            }
+            else if (oth == 4) {
+                moveDirection = (new Vector3(1f, x/2, 0)).normalized;
             }
         }
         else {

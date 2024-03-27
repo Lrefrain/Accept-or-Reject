@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GiftboxMove : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GiftboxMove : MonoBehaviour
     private UseTools useTools;
     private Tools tools;
     private CurtainMove curtainMove;
+    public Text toolBar;
     void Start()
     {
         ResetBox();
@@ -29,6 +31,7 @@ public class GiftboxMove : MonoBehaviour
         switch (boxState) {
             case 0: // box prepare...
                 timer -= Time.smoothDeltaTime;
+                toolBar.text = string.Format("Tool:{0:F2}s", timer);
                 // Debug.Log(timer);
                 if (timer <= 0) {
                     boxState = 1;

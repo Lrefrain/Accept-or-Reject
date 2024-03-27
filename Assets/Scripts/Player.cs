@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     private UseTools useTools;
     public GameObject ballPrefab, starPrefab;
-    public TextMeshProUGUI cdBar;
-    public TextMeshProUGUI hpBar;
+    public Text cdBar;
+    public Text hpBar;
     public int HP;
     private float lastShootTime, shootCD = 0.5f;
     public float speed;
@@ -24,8 +23,8 @@ public class Player : MonoBehaviour
         lastShootTime = -3f;
         useTools = Camera.main.GetComponent<UseTools>();
         s = Camera.main.GetComponent<CameraSupport>();
-        cdBar = GameObject.Find("Canvas/CDBar").GetComponent<TextMeshProUGUI>();
-        hpBar = GameObject.Find("Canvas/HPBar").GetComponent<TextMeshProUGUI>();
+        // cdBar = GameObject.Find("Canvas/CDBar").GetComponent<TextMeshProUGUI>();
+        // hpBar = GameObject.Find("Canvas/HPBar").GetComponent<TextMeshProUGUI>();
         GetBounds();
     }
 
@@ -59,7 +58,7 @@ public class Player : MonoBehaviour
     }
     private void CheckHP()
     {
-        hpBar.text = HP.ToString();
+        hpBar.text = "HP:" + HP;
         if (HP == 0) {
             Destroy(gameObject);
             Time.timeScale = 0;
@@ -82,7 +81,7 @@ public class Player : MonoBehaviour
     private void ShootControl()
     {
         if (Time.time - lastShootTime > GetShootCD() && enableShoot) {
-            cdBar.text = "Bullet:Ready";
+            cdBar.text = "Ball:Ready";
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
                 lastShootTime = Time.time;
                 Debug.Log(useTools.bulletsNum);
