@@ -5,33 +5,41 @@ using UnityEngine;
 public class CurtainMove : MonoBehaviour
 {
 
-    public bool isCurtainOpen = false;
-    private float curtainSpeed = 500f;
+    public bool curtainUp = false, curtainDown = false;
+    private float curtainSpeed = 200f;
+    private float startY = 197f, endY = 12f;
     void Start()
     {
-
     }
-
     // Update is called once per frame
     void Update()
     {
-        if(isCurtainOpen)
-        {
-            OpenCurtain();
+        if (curtainUp){
+            CurtainUp();
         }
-
+        if (curtainDown){
+            CurtainDown();
+        }
     }
 
-    public void OpenCurtain()
+    private void CurtainUp()
     {
-        transform.position = transform.position + new Vector3(0f, -curtainSpeed * Time.smoothDeltaTime, 0f);
-        if(transform.position.y < -700f)
-        {
-            isCurtainOpen = false;
+        Vector3 pos = transform.position;
+        pos += new Vector3(0f, curtainSpeed * Time.smoothDeltaTime, 0f);
+        if(pos.y >= startY) {
+            pos.y = startY;
+            curtainUp = false;
         }
+        transform.position = pos;
     }
-
-    
-
-
+    private void CurtainDown()
+    {
+        Vector3 pos = transform.position;
+        pos -= new Vector3(0f, curtainSpeed * Time.smoothDeltaTime, 0f);
+        if(pos.y <= endY) {
+            pos.y = endY;
+            curtainDown = false;
+        }
+        transform.position = pos;
+    }
 }

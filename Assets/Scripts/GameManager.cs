@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         float dt = CD - (Time.time - lastTime);
         if (dt < 0) {
             lastTime = Time.time;
-            tools.StartChoice();
+            // tools.StartChoice();
         }
         else {
             toolBar.text = string.Format("Tool:{0:F0}s", dt);
