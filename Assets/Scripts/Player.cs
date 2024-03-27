@@ -82,12 +82,19 @@ public class Player : MonoBehaviour
             cdBar.text = "Bullet:Ready";
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
                 lastShootTime = Time.time;
-                GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);
-                bullet.GetComponent<Ball>().heroOrEnemy = 0;     // mark as a hero bullet
+                Debug.Log(useTools.bulletsNum);
+                for (int i = 0; i < useTools.bulletsNum; ++i) {
+                    GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+                    bullet.GetComponent<Ball>().heroOrEnemy = 0;     // mark as a hero bullet
+                    bullet.GetComponent<Ball>().oth = i;            // mark its dir index
+                    bullet.transform.localScale *= 0.7f;
+                    Debug.Log(i);
+                }
 
                 if (useTools.heroHasStar) {
                     GameObject star = Instantiate(starPrefab, transform.position, Quaternion.identity);
                     star.GetComponent<Star>().heroOrEnemy = 0;     // mark as a hero bullet
+                    star.transform.localScale *= 0.7f;
                 }
                 cdBar.text = "";
             }

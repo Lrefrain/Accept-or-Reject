@@ -26,6 +26,8 @@ public class UseTools : MonoBehaviour
         descriptions[4] = "Increase HP by 1!";
         descriptions[5] = "Dcresase HP by 1! (if your HP > 1)";
         descriptions[6] = "Clear Screen!";
+        descriptions[7] = "Add Shizuka! (DO NOT shoot her)";
+        descriptions[8] = "Multi-Bullets!";
         textMP = text.GetComponent<TextMeshProUGUI>();
     }
 
@@ -63,6 +65,12 @@ public class UseTools : MonoBehaviour
                 break;
             case 6:
                 ClearScreen();
+                break;
+            case 7:
+                AddShizuka();
+                break;
+            case 8:
+                MultiBullets();
                 break;
         }
 
@@ -187,5 +195,35 @@ public class UseTools : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+        
+// AddShizuka ==========================================
+
+    public GameObject ShizukaPrefab;
+
+    public void AddShizuka()
+    {
+        GameObject Shizuka = Instantiate(ShizukaPrefab, transform.position, Quaternion.identity);
+    }
+
+// MultiBullets ==========================================
+
+    public int bulletsNum = 1;
+
+    public void MultiBullets()
+    {
+        bulletsNum = 3;
+        StartCoroutine(ChangeBulletsNumAfterDelay(delaySeconds)); // 开始协程
+    }
+    
+    void SetMultiBulletsForBegin()
+    {
+        bulletsNum = 1;
+    }
+
+    IEnumerator ChangeBulletsNumAfterDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        SetMultiBulletsForBegin();
     }
 }

@@ -15,8 +15,8 @@ public class Enemy : MonoBehaviour
     private UseTools useTools;
     private float lastShootBallTime;
     private float lastShootStarTime;
-    private float shootBallCD = 1f;
-    private float shootStarCD = 1.5f;
+    private float shootBallCD = 0.6f;
+    private float shootStarCD = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
