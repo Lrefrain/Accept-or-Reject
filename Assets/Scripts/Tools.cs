@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Tools : MonoBehaviour
@@ -8,17 +7,15 @@ public class Tools : MonoBehaviour
     public GameObject acceptButton, rejectButton, confirmButton, chooseAnim, text;
     // public GameObject chooseAnim, curtain;
     // public GameObject happyAmon, annoyedAmon;
-    private TextMeshProUGUI textMP;
     private int id;
     private UseTools useTools;
     private CurtainMove curtainMove;
     private GiftboxMove boxMove;
-
+    public GameObject[] toolsPrefab;
     // Start is called before the first frame update
     void Start()
     {
         DisableAll();
-        textMP = text.GetComponent<TextMeshProUGUI>();
         useTools = Camera.main.GetComponent<UseTools>();
         curtainMove = GameObject.Find("Curtain").GetComponent<CurtainMove>();
         boxMove = GameObject.Find("ChooseAnim").GetComponent<GiftboxMove>();
