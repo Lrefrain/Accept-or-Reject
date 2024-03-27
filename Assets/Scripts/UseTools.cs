@@ -81,8 +81,11 @@ public class UseTools : MonoBehaviour
         text.SetActive(true);
         textMP.text = descriptions[id];
     }
-
-    public float delaySeconds = 10f; // buff/debuff 延迟时间
+    public void StopAll()
+    {
+        StopEnemy();
+    }
+    public float delaySeconds = 8f; // buff/debuff 延迟时间
 
 // StopEnemy ==========================================
     public float enemyBallSpeed = 200f;
