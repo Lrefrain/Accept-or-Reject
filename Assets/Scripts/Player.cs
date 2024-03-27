@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    private CDManager cdManager;
     private UseTools useTools;
     public GameObject ballPrefab, starPrefab;
-    public Text cdBar;
+    // public Text cdBar;
     public Text hpBar;
     public int HP;
-    private float lastShootTime, shootCD = 0.5f;
+    private float lastShootTime;
+    public float shootCD = 0.5f;
     public float speed;
     private float leftX, rightX, upY, lowY, rate = 0.3f;
     private CameraSupport s;
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cdManager = gameObject.GetComponent<CDManager>();
         speed = 120f;
         HP = 10;
         lastShootTime = -3f;
@@ -81,9 +84,14 @@ public class Player : MonoBehaviour
     private void ShootControl()
     {
         if (Time.time - lastShootTime > GetShootCD() && enableShoot) {
-            cdBar.text = "Ball:Ready";
+            // cdBar.text = "Ball:Ready";
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
                 lastShootTime = Time.time;
+                // CDManagerBar
+                cdManager.lst = Time.time;
+                cdManager.image.fillAmount = 0f;
+                cdManager.shootCD = GetShootCD();
+
                 Debug.Log(useTools.bulletsNum);
                 for (int i = 0; i < useTools.bulletsNum; ++i) {
                     GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);
@@ -98,7 +106,7 @@ public class Player : MonoBehaviour
                     star.GetComponent<Star>().heroOrEnemy = 0;     // mark as a hero bullet
                     star.transform.localScale *= 0.7f;
                 }
-                cdBar.text = "";
+                // cdBar.text = "";
             }
         }
     }
