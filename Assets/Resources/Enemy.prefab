@@ -98,9 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48354fe6d316d034e9f55a4b3f67c945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 7535741449635749973, guid: 47bc785642aaeb14e8c9321bd0b1e13e, type: 3}
+  health: {fileID: 2325704902430661288, guid: 47e2167749fd5e64986d9608e129dc15, type: 3}
+  ballPrefab: {fileID: 7535741449635749973, guid: 16bee40a12e89ec44ab7804353d111f4, type: 3}
   starPrefab: {fileID: 3216187043865375609, guid: 78d6488353543f44185d69efa2ede772, type: 3}
-  HP: 5
+  HP: 50
+  MaxHP: 5
 --- !u!58 &6485019442986459526
 CircleCollider2D:
   m_ObjectHideFlags: 0

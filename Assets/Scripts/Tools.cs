@@ -15,6 +15,9 @@ public class Tools : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        toolsPrefab = new GameObject[10];
+        // toolsPrefab[4] = GameObject.Find("Tool4");
+
         DisableAll();
         useTools = Camera.main.GetComponent<UseTools>();
         curtainMove = GameObject.Find("Curtain").GetComponent<CurtainMove>();
@@ -32,7 +35,7 @@ public class Tools : MonoBehaviour
         rejectButton.SetActive(true);
         // chooseAnim.SetActive(true);
         // curtain.SetActive(true);
-        id = Random.Range(0, 9);
+        id = Random.Range(4, 5);
     }
     private void DisableAll()
     {
@@ -42,6 +45,8 @@ public class Tools : MonoBehaviour
         // curtain.SetActive(false);
         // chooseAnim.SetActive(false);
         text.SetActive(false);
+        // Debug.Log(id);
+        // useTools.ddddd.SetActive(false);
     }
     public void ApplyTool(string choice)
     {

@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject health;
+    private Slider slider;
     public GameObject ballPrefab, starPrefab;
     public int HP = 5;
+    public int MaxHP = 5;
     private float speed = 50f;
     private Vector3 moveDirection, moveTarget;
     private float leftX, rightX, lowY, upY;
@@ -27,11 +31,15 @@ public class Enemy : MonoBehaviour
         s = Camera.main.GetComponent<CameraSupport>();
         GetPos();
         useTools = Camera.main.GetComponent<UseTools>();
+        slider = health.transform.GetChild(0).GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("{}{}{}{}}");
+        slider.value = (float)HP / (float)MaxHP;
+        Debug.Log(slider.value);
         speed = useTools.enemySpeed;
         enableShoot = useTools.enemyEnableShoot;
         ShootControl();
