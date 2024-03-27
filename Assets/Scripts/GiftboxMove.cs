@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GiftboxMove : MonoBehaviour
 {
-    public GameObject annoyedAmon, happyAmon;
+    // public GameObject annoyedAmon, happyAmon;
     public bool boxUp = false;
     private float timer, boxAppearPeriod = 3f;
     private int boxState = 0;
@@ -84,7 +84,7 @@ public class GiftboxMove : MonoBehaviour
     {
         boxState = 0;
         timer = boxAppearPeriod;
-        happyAmon.SetActive(false);
-        annoyedAmon.SetActive(false);
+        // happyAmon.SetActive(false);
+        // annoyedAmon.SetActive(false);
     }
 }
