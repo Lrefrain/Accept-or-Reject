@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     private UseTools useTools;
     public GameObject ballPrefab, starPrefab;
-    public Text cdBar;
+    public TextMeshProUGUI cdBar;
+    public TextMeshProUGUI hpBar;
     public int HP;
     private float lastShootTime, shootCD = 0.5f, speed = 100f;
     private float leftX, rightX, upY, lowY, rate = 0.3f;
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
         lastShootTime = -3f;
         useTools = Camera.main.GetComponent<UseTools>();
         s = Camera.main.GetComponent<CameraSupport>();
+        cdBar = GameObject.Find("Canvas/CDBar").GetComponent<TextMeshProUGUI>();
+        hpBar = GameObject.Find("Canvas/HPBar").GetComponent<TextMeshProUGUI>();
         GetBounds();
     }
 
@@ -52,6 +56,7 @@ public class Player : MonoBehaviour
     }
     private void CheckHP()
     {
+        hpBar.text = HP.ToString();
         if (HP == 0) {
             Destroy(gameObject);
             Time.timeScale = 0;

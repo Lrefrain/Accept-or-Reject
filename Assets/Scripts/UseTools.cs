@@ -25,6 +25,7 @@ public class UseTools : MonoBehaviour
         descriptions[3] = "Get Higher Shoot CD!";
         descriptions[4] = "Increase HP by 1!";
         descriptions[5] = "Dcresase HP by 1! (if your HP > 1)";
+        descriptions[6] = "Clear Screen!";
         textMP = text.GetComponent<TextMeshProUGUI>();
     }
 
@@ -59,6 +60,9 @@ public class UseTools : MonoBehaviour
                 break;
             case 5:
                 DecreaseHP();
+                break;
+            case 6:
+                ClearScreen();
                 break;
         }
 
@@ -164,6 +168,24 @@ public class UseTools : MonoBehaviour
     {
         if (player.HP > 1) {
             -- player.HP;
+        }
+    }
+    
+// ClearScreen ==========================================
+
+    public void ClearScreen()
+    {
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+        GameObject[] stars = GameObject.FindGameObjectsWithTag("Star");
+        foreach (GameObject gameObject in balls) {
+            if (gameObject.GetComponent<Ball>().heroOrEnemy == 1) {
+                Destroy(gameObject);
+            }
+        }
+        foreach (GameObject gameObject in stars) {
+            if (gameObject.GetComponent<Star>().heroOrEnemy == 1) {
+                Destroy(gameObject);
+            }
         }
     }
 }

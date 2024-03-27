@@ -80,6 +80,7 @@ public class Star : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) 
     {
         if (heroOrEnemy == 1 && other.gameObject.CompareTag("Hero")) {
+            useTools.ClearScreen();
             audioManager.ExploreSound();
             other.gameObject.GetComponent<Player>().HP --;
             other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);
