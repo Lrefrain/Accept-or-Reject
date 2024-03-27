@@ -61,7 +61,6 @@ public class Ball : MonoBehaviour
             audioManager.ExploreSound();
             other.gameObject.GetComponent<Enemy>().HP --;
             other.gameObject.GetComponent<Enemy>().HP = Mathf.Max(0, other.gameObject.GetComponent<Enemy>().HP);
-            Debug.Log(other.gameObject.GetComponent<Enemy>().HP);
             Destroy(gameObject);
         }
     }

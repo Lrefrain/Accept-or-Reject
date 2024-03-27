@@ -1216,6 +1216,7 @@ MonoBehaviour:
   heroStarSpeed: 150
   enemySpeed: 50
   heroHasStar: 0
+  shootCDRate: 1
 --- !u!114 &268816706
 MonoBehaviour:
   m_ObjectHideFlags: 0

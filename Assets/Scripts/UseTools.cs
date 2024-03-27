@@ -10,14 +10,21 @@ public class UseTools : MonoBehaviour
     private TextMeshProUGUI textMP;
     private string[] descriptions;
     private GameObject[] enemyBalls;
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player").GetComponent<Player>();
         SetSpeedForBegin();
         SetBulletForBegin();
+        SetShootCDForBegin();
         descriptions = new string[10];
         descriptions[0] = "The World!";
         descriptions[1] = "Get Star Bullet!";
+        descriptions[2] = "Get Lower Shoot CD!";
+        descriptions[3] = "Get Higher Shoot CD!";
+        descriptions[4] = "Increase HP by 1!";
+        descriptions[5] = "Dcresase HP by 1! (if your HP > 1)";
         textMP = text.GetComponent<TextMeshProUGUI>();
     }
 
@@ -30,6 +37,7 @@ public class UseTools : MonoBehaviour
         //     tag = true;
         // }
     }
+
     public void GoWork(int id)
     {
         Debug.Log("work" + id);
@@ -40,9 +48,22 @@ public class UseTools : MonoBehaviour
             case 1:
                 AddStarBullet();
                 break;
+            case 2:
+                LowerShootCD();
+                break;
+            case 3:
+                HigherShootCD();
+                break;
+            case 4:
+                IncreaseHP();
+                break;
+            case 5:
+                DecreaseHP();
+                break;
         }
 
     }
+
     public void ShowTool(int id)
     {
         text.SetActive(true);
@@ -103,5 +124,46 @@ public class UseTools : MonoBehaviour
     {
         yield return new WaitForSeconds(delaySeconds);
         SetBulletForBegin();
+    }
+
+// Lower/HigherShootCD ==========================================
+
+    public float shootCDRate = 1f;
+
+    private void LowerShootCD()
+    {
+        shootCDRate = 0.5f;
+        StartCoroutine(ChangeShootCDAfterDelay(delaySeconds)); // 开始协程
+    }
+
+    private void HigherShootCD()
+    {
+        shootCDRate = 2f;
+        StartCoroutine(ChangeShootCDAfterDelay(delaySeconds)); // 开始协程
+    }
+    
+    void SetShootCDForBegin()
+    {
+        shootCDRate = 1f;
+    }
+
+    IEnumerator ChangeShootCDAfterDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        SetShootCDForBegin();
+    }
+    
+// Inc/DecHP ==========================================
+
+    private void IncreaseHP()
+    {
+        ++ player.HP;
+    }
+
+    private void DecreaseHP()
+    {
+        if (player.HP > 1) {
+            -- player.HP;
+        }
     }
 }
