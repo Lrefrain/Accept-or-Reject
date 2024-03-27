@@ -30,7 +30,7 @@ public class Tools : MonoBehaviour
         rejectButton.SetActive(true);
         chooseAnim.SetActive(true);
         curtain.SetActive(true);
-        id = Random.Range(0, 2);
+        id = Random.Range(0, 6);
     }
     private void DisableAll()
     {

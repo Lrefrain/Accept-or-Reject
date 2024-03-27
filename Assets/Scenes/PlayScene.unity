@@ -1216,6 +1216,7 @@ MonoBehaviour:
   heroStarSpeed: 150
   enemySpeed: 50
   heroHasStar: 0
+  shootCDRate: 1
 --- !u!114 &268816706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2152,7 +2153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 7535741449635749973, guid: 47bc785642aaeb14e8c9321bd0b1e13e, type: 3}
   starPrefab: {fileID: 3216187043865375609, guid: 78d6488353543f44185d69efa2ede772, type: 3}
-  cdBar: {fileID: 403388997}
+  cdBar: {fileID: 1859209533}
   HP: 3
 --- !u!95 &2137232633
 Animator:
