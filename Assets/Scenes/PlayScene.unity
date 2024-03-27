@@ -1209,7 +1209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 113969559}
   enemy: {fileID: 0}
-  delaySeconds: 2
+  delaySeconds: 8
   enemyBallSpeed: 300
   heroBallSpeed: 300
   enemyStarSpeed: 150
@@ -1217,6 +1217,7 @@ MonoBehaviour:
   enemySpeed: 50
   heroHasStar: 0
   shootCDRate: 1
+  ShizukaPrefab: {fileID: 3970659616243139121, guid: 95007df473032dd449fe57fcffb7ade1, type: 3}
 --- !u!114 &268816706
 MonoBehaviour:
   m_ObjectHideFlags: 0

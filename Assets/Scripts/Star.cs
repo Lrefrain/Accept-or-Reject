@@ -85,7 +85,15 @@ public class Star : MonoBehaviour
             other.gameObject.GetComponent<Player>().HP --;
             other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);
             Destroy(gameObject);
-        } 
+        }
+
+        if (heroOrEnemy == 0 && other.gameObject.CompareTag("Shizuka")) {
+            useTools.ClearScreen();
+            audioManager.ExploreSound();
+            player.HP --;
+            player.HP = Mathf.Max(0, player.HP);
+            Destroy(gameObject);
+        }
         
         if (heroOrEnemy == 0 && other.gameObject.CompareTag("Enemy")) {
             audioManager.ExploreSound();
