@@ -14,12 +14,16 @@ public class GiftboxMove : MonoBehaviour
     private Tools tools;
     private CurtainMove curtainMove;
     public Text toolBar;
+    // public AudioClip boxClip;
+    // private AudioSource audioSource;
+    // public AudioSource bgm;
     void Start()
     {
         ResetBox();
         useTools = Camera.main.GetComponent<UseTools>();
         tools = Camera.main.GetComponent<Tools>();
         curtainMove = GameObject.Find("Curtain").GetComponent<CurtainMove>();
+        // audioSource = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -40,10 +44,12 @@ public class GiftboxMove : MonoBehaviour
             case 1: // box down
                 useTools.StopAll();
                 curtainMove.curtainDown = true;
+                // BoxSound();
                 BoxDown();
                 break;
             case 2: // box waiting for player
                 if (boxUp){
+                    // bgm.UnPause();
                     BoxUp();
                 }
                 break;
@@ -62,6 +68,7 @@ public class GiftboxMove : MonoBehaviour
     }
     private void BoxDown()
     {
+        // bgm.Pause();
         Vector3 pos = transform.position;
         pos -= new Vector3(0f, boxSpeed * Time.smoothDeltaTime, 0f);
         if(transform.position.y <= boxendY){
@@ -77,5 +84,10 @@ public class GiftboxMove : MonoBehaviour
         timer = boxAppearPeriod;
         // happyAmon.SetActive(false);
         // annoyedAmon.SetActive(false);
+    }
+    private void BoxSound()
+    {
+        // audioSource.clip = boxClip;
+        // audioSource.PlayOneShot(boxClip);
     }
 }

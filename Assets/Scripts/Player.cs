@@ -1,3 +1,4 @@
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,8 +64,8 @@ public class Player : MonoBehaviour
     {
         hpBar.text = "HP:" + HP;
         if (HP == 0) {
+            SceneManager.LoadScene("LoseScene");
             Destroy(gameObject);
-            Time.timeScale = 0;
         }
     }
     private void MoveControl()

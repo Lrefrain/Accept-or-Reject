@@ -1,3 +1,4 @@
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -5,11 +6,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject health;
-    private Slider slider;
+    public Slider slider;
     public GameObject ballPrefab, starPrefab;
-    public int HP = 5;
-    public int MaxHP = 5;
+    public int HP;
+    public int MaxHP;
     private float speed = 50f;
     private Vector3 moveDirection, moveTarget;
     private float leftX, rightX, lowY, upY;
@@ -26,18 +26,17 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        HP = MaxHP = 50;
         lastShootBallTime = 0f;
         lastShootStarTime = 0f;
         s = Camera.main.GetComponent<CameraSupport>();
         GetPos();
         useTools = Camera.main.GetComponent<UseTools>();
-        slider = health.transform.GetChild(0).GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("{}{}{}{}}");
         slider.value = (float)HP / (float)MaxHP;
         Debug.Log(slider.value);
         speed = useTools.enemySpeed;
@@ -46,6 +45,7 @@ public class Enemy : MonoBehaviour
         GotoNewDes();
 
         if (HP == 0) {
+            SceneManager.LoadScene("WinScene");
             Destroy(gameObject);
         }
     }

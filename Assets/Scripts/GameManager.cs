@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private float CD = 10.0f, lastTime;
+    // private float CD = 10.0f, lastTime;
     private Tools tools;
     public Text timeBar;
     // Start is called before the first frame update
     void Start()
     {
-        lastTime = Time.time;
+        // lastTime = Time.time;
         tools = gameObject.GetComponent<Tools>();
     }
 

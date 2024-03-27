@@ -25,4 +25,8 @@ public class ApplicationManager : MonoBehaviour {
     {
         SceneManager.LoadScene("Playscene");
     }
+	public void Helper()
+    {
+        SceneManager.LoadScene("Helper");
+    }
 }

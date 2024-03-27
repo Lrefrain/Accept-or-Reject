@@ -109,8 +109,8 @@ public class UseTools : MonoBehaviour
 
         player.speed = 0f;
         player.enableShoot = false;
-        heroStarSpeed = 0f;
-        heroBallSpeed = 0f;
+        // heroStarSpeed = 0f;
+        // heroBallSpeed = 0f;
     }
     public void BeginAllFor0()
     {
