@@ -31,12 +31,11 @@ public class Tools : MonoBehaviour
     public void StartChoice()
     {
         // Time.timeScale = 0;
-        curtainMove.curtainDown = true;
         acceptButton.SetActive(true);
         rejectButton.SetActive(true);
         // chooseAnim.SetActive(true);
         // curtain.SetActive(true);
-        id = Random.Range(0, 2);
+        id = Random.Range(0, 1);
     }
     private void DisableAll()
     {
@@ -60,13 +59,19 @@ public class Tools : MonoBehaviour
         }
         else if (choice == "Reject") {
             curtainMove.curtainUp = true;
+            useTools.BeginAll();
         }
         else if (choice == "Confirm") {
             // boxMove.boxUp = true;
             useTools.GoWork(id);
+            if (id == 0) {
+                useTools.BeginAllFor0();
+            }
+            else {
+                useTools.BeginAll();
+            }
         }
         boxMove.boxUp = true;
-        useTools.BeginAll();
         ReturnGame();
     }
     private void ReturnGame()

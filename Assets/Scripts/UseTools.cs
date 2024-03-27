@@ -11,9 +11,11 @@ public class UseTools : MonoBehaviour
     private string[] descriptions;
     private GameObject[] enemyBalls;
     private Player player;
+    public float delaySeconds; // buff/debuff 延迟时间
     // Start is called before the first frame update
     void Start()
     {
+        delaySeconds = 8f;
         player = GameObject.Find("Player").GetComponent<Player>();
         SetSpeedForBegin();
         SetBulletForBegin();
@@ -81,7 +83,6 @@ public class UseTools : MonoBehaviour
         text.SetActive(true);
         textMP.text = descriptions[id];
     }
-    public float delaySeconds = 8f; // buff/debuff 延迟时间
 
 // StopEnemy ==========================================
     public float enemyBallSpeed = 200f;
@@ -92,14 +93,23 @@ public class UseTools : MonoBehaviour
     public bool enemyEnableShoot = true;
     public void StopAll()
     {
-        StopEnemy();
+        enemyBallSpeed = 0f;
+        enemyStarSpeed = 0f;
+        enemySpeed = 0f;
         enemyEnableShoot = false;
-        player.speed = 0;
+        player.speed = 0f;
         player.enableShoot = false;
-    } 
+    }
+    public void BeginAllFor0()
+    {
+        enemyEnableShoot = true;
+        player.speed = 120f;
+        player.enableShoot = true;
+    }
     public void BeginAll()
     {
-        // StartEnemy();
+        // enemySpeed = 50f;
+        SetSpeedForBegin();
         enemyEnableShoot = true;
         player.speed = 120f;
         player.enableShoot = true;
