@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     private float CD = 10.0f, lastTime;
     private Tools tools;
-    public TextMeshProUGUI timeBar, toolBar;
+    public Text timeBar;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChoiceTimer();
+        // ChoiceTimer();
         UpdateTimeBar();
         GameQuit();
     }
@@ -32,15 +32,12 @@ public class GameManager : MonoBehaviour
     {
         timeBar.text = string.Format("Time:{0:F2}s", Time.time);
     }
-    private void ChoiceTimer()
-    {
-        float dt = CD - (Time.time - lastTime);
-        if (dt < 0) {
-            lastTime = Time.time;
-            // tools.StartChoice();
-        }
-        else {
-            toolBar.text = string.Format("Tool:{0:F0}s", dt);
-        }
-    }
+    // private void ChoiceTimer()
+    // {
+    //     float dt = CD - (Time.time - lastTime);
+    //     if (dt < 0) {
+    //         lastTime = Time.time;
+    //         // tools.StartChoice();
+    //     }
+    // }
 }
