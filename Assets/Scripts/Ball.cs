@@ -57,7 +57,6 @@ public class Ball : MonoBehaviour
         if (heroOrEnemy == 0 && other.gameObject.CompareTag("Enemy")){
             other.gameObject.GetComponent<Enemy>().HP --;
             other.gameObject.GetComponent<Enemy>().HP = Mathf.Max(0, other.gameObject.GetComponent<Enemy>().HP);
-            Debug.Log(other.gameObject.GetComponent<Enemy>().HP);
             Destroy(gameObject);
         }
     }

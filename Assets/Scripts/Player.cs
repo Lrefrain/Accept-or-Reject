@@ -41,9 +41,14 @@ public class Player : MonoBehaviour
         transform.position += moveDirection * speed * Time.deltaTime;
     }
 
+    private float GetShootCD()
+    {
+        return shootCD * useTools.shootCDRate;
+    }
+
     private void ShootControl()
     {
-        if (Time.time - lastShootTime > shootCD) {
+        if (Time.time - lastShootTime > GetShootCD()) {
             cdBar.text = "Bullet:Ready";
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
                 lastShootTime = Time.time;
