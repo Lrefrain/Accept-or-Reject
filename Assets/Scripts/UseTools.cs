@@ -12,6 +12,7 @@ public class UseTools : MonoBehaviour
     private GameObject[] enemyBalls;
     private Player player;
     public float delaySeconds; // buff/debuff 延迟时间
+    public GameObject[] toolsPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +22,15 @@ public class UseTools : MonoBehaviour
         SetBulletForBegin();
         SetShootCDForBegin();
         descriptions = new string[10];
+        toolsPrefab = new GameObject[10];
         descriptions[0] = "The World!";
         descriptions[1] = "Get Star Bullet!";
         descriptions[2] = "Get Lower Shoot CD!";
         descriptions[3] = "Get Higher Shoot CD!";
+        // -----------------------------------
+        toolsPrefab[4] = GameObject.Find("Tool4");
         descriptions[4] = "Increase HP by 1!";
+        // -----------------------------------
         descriptions[5] = "Decrease HP by 1!\n(if your HP > 1)";
         descriptions[6] = "Clear Screen!";
         descriptions[7] = "Add Shizuka!\n(DO NOT touch her)";
@@ -80,6 +85,7 @@ public class UseTools : MonoBehaviour
 
     public void ShowTool(int id)
     {
+        // toolsPrefab[id].SetActive(true);
         textObj.SetActive(true);
         text.text = descriptions[id];
     }
