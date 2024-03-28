@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class UseTools : MonoBehaviour
 {
-    public GameObject textObj, enemy;
+    public GameObject textObj;
     // public GameObject ;
     private Text text;
     private string[] descriptions;
     private GameObject[] enemyBalls;
     private Player player;
+    private Enemy enemy;
     public float delaySeconds; // buff/debuff 延迟时间
     public GameObject[] toolsInstant;
     private CameraSupport cs;
@@ -20,21 +21,23 @@ public class UseTools : MonoBehaviour
         cs = Camera.main.GetComponent<CameraSupport>();
         delaySeconds = 10f;
         player = GameObject.Find("Player").GetComponent<Player>();
+        enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
         SetSpeedForBegin();
         SetBulletForBegin();
         SetShootCDForBegin();
         descriptions = new string[10];
         descriptions[0] = "The World!";
         descriptions[1] = "Get Star Bullet!";
-        descriptions[2] = "Get Lower Shoot CD!";
-        descriptions[3] = "Get Higher Shoot CD!";
-        descriptions[4] = "Increase HP by 1!";
-        descriptions[5] = "Decrease HP by 1!\n(if your HP > 1)";
+        descriptions[2] = "Get Shorter Shoot CD!";
+        descriptions[3] = "Get Longer Shoot CD!";
+        descriptions[4] = "Increase Player HP by 1!";
+        descriptions[5] = "Increase Enemy HP by 10-15!";
         descriptions[6] = "Clear Screen!";
         descriptions[7] = "Add Shizuka!\n(DO NOT touch her)";
         descriptions[8] = "Multi-Bullets!";
+        descriptions[9] = "Random Door Takes You Anywhere!";
 
-        for (int i = 0; i < 9; ++i) {
+        for (int i = 0; i < 10; ++i) {
             toolsInstant[i].SetActive(false);
         }
         
@@ -91,6 +94,9 @@ public class UseTools : MonoBehaviour
                 break;
             case 8:
                 MultiBullets();
+                break;
+            case 9:
+                RandomDoor();
                 break;
         }
 
@@ -185,14 +191,14 @@ public class UseTools : MonoBehaviour
 
     private void LowerShootCD()
     {
-        shootCDRate = 0.5f;
-        StartCoroutine(ChangeShootCDAfterDelay(delaySeconds)); // 开始协程
+        shootCDRate = 0.01f;
+        StartCoroutine(ChangeShootCDAfterDelay(5f)); // 开始协程
     }
 
     private void HigherShootCD()
     {
-        shootCDRate = 2f;
-        StartCoroutine(ChangeShootCDAfterDelay(delaySeconds)); // 开始协程
+        shootCDRate = 4f;
+        StartCoroutine(ChangeShootCDAfterDelay(5f)); // 开始协程
     }
     
     void SetShootCDForBegin()
@@ -215,9 +221,8 @@ public class UseTools : MonoBehaviour
 
     private void DecreaseHP()
     {
-        if (player.HP > 1) {
-            -- player.HP;
-        }
+        int value = Random.Range(10, 15);
+        enemy.HP = Mathf.Min(enemy.MaxHP, enemy.HP + value);
     }
     
 // ClearScreen ==========================================
@@ -267,4 +272,29 @@ public class UseTools : MonoBehaviour
         yield return new WaitForSeconds(delaySeconds);
         SetMultiBulletsForBegin();
     }
+
+// RandomDoor ==========================================
+
+    private float blinkTime = 1f;
+    private int blinks = 5;
+
+    public void RandomDoor()
+    {
+        BlinkPlayer(blinks, blinkTime);
+    }
+
+    void BlinkPlayer(int numBlinks, float seconds)
+    {
+        StartCoroutine(DoBlinks(numBlinks, seconds));
+    }
+    
+    IEnumerator DoBlinks(int numBlinks, float seconds)
+    {
+        for (int i = 0; i < numBlinks; i++)
+        {
+            player.RandomShift();
+            yield return new WaitForSeconds(seconds);
+        }
+    }
+
 }

@@ -35,6 +35,16 @@ public class Star : MonoBehaviour
         Camera.main.GetComponent<ShakeScreen>().StartShake();
     }
 
+    void Blink()
+    {
+        player.gameObject.GetComponent<Bling>().DamagePlayer();
+    }
+
+    void BlinkEnemy()
+    {
+        enemy.gameObject.GetComponent<BlingEnemy>().DamagePlayer();
+    }
+
     private IEnumerator DestroyComponentAfterDelay(float delaySeconds)
     {
         yield return new WaitForSeconds(delaySeconds);
@@ -86,7 +96,9 @@ public class Star : MonoBehaviour
     {
         if (heroOrEnemy == 1 && other.gameObject.CompareTag("Hero")) {
             audioManager.ExploreSound();
-            Invoke("Shake", 0.2f);
+            // Invoke("Shake", 0.2f);
+            Shake();
+            Blink();
             useTools.ClearScreen();
             other.gameObject.GetComponent<Player>().HP --;
             other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);
@@ -95,7 +107,9 @@ public class Star : MonoBehaviour
 
         if (heroOrEnemy == 0 && other.gameObject.CompareTag("Shizuka")) {
             audioManager.ExploreSound();
-            Invoke("Shake", 0.2f);
+            // Invoke("Shake", 0.2f);
+            Shake();
+            Blink();
             useTools.ClearScreen();
             player.HP --;
             player.HP = Mathf.Max(0, player.HP);
@@ -103,6 +117,7 @@ public class Star : MonoBehaviour
         }
         
         if (heroOrEnemy == 0 && other.gameObject.CompareTag("Enemy")) {
+            BlinkEnemy();
             audioManager.ExploreSound();
             other.gameObject.GetComponent<Enemy>().HP --;
             other.gameObject.GetComponent<Enemy>().HP = Mathf.Max(0, other.gameObject.GetComponent<Enemy>().HP);

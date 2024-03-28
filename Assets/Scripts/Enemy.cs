@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 {
     public Slider slider;
     public GameObject ballPrefab, starPrefab;
+    public AudioManager audioManager;
     public int HP;
     public int MaxHP;
     private float speed = 50f;
@@ -26,7 +27,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HP = MaxHP = 50;
+        audioManager = Camera.main.GetComponent<AudioManager>();
+        HP = MaxHP = Random.Range(100, 120);
         lastShootBallTime = 0f;
         lastShootStarTime = 0f;
         s = Camera.main.GetComponent<CameraSupport>();
@@ -44,6 +46,7 @@ public class Enemy : MonoBehaviour
         GotoNewDes();
 
         if (HP == 0) {
+            // audioManager.EnemyDeadSound();
             SceneManager.LoadScene("WinScene");
             Destroy(gameObject);
         }

@@ -9,11 +9,12 @@ public class Player : MonoBehaviour
     private CDManager cdManager;
     private UseTools useTools;
     public GameObject ballPrefab, starPrefab;
+    public AudioManager audioManager;
     // public Text cdBar;
     public Text hpBar;
     public int HP;
     private float lastShootTime;
-    public float shootCD = 0.5f;
+    public float shootCD = 0.3f;
     public float speed;
     private float leftX, rightX, upY, lowY, rate = 0.3f;
     private CameraSupport s;
@@ -21,9 +22,11 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = Camera.main.GetComponent<AudioManager>();
         cdManager = gameObject.GetComponent<CDManager>();
         speed = 120f;
-        HP = 10;
+        shootCD = 0.25f;
+        HP = 15;
         lastShootTime = -3f;
         useTools = Camera.main.GetComponent<UseTools>();
         s = Camera.main.GetComponent<CameraSupport>();
@@ -64,6 +67,7 @@ public class Player : MonoBehaviour
     {
         hpBar.text = "HP:" + HP;
         if (HP == 0) {
+            // audioManager.PlayerDeadSound();
             SceneManager.LoadScene("LoseScene");
             Destroy(gameObject);
         }
@@ -134,5 +138,10 @@ public class Player : MonoBehaviour
         }
 
         return false;
+    }
+     
+    public void RandomShift()
+    {        
+        transform.localPosition =  new Vector3(Random.Range(leftX, rightX), Random.Range(lowY, upY), 0);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioClip clickClip, exploreClip;
+    public AudioClip clickClip, exploreClip, playerDead, enemyDead;
     private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
@@ -26,5 +26,15 @@ public class AudioManager : MonoBehaviour
     {
         audioSource.clip = exploreClip;
         audioSource.PlayOneShot(exploreClip);
+    }
+    public void PlayerDeadSound()
+    {
+        audioSource.clip = playerDead;
+        audioSource.PlayOneShot(playerDead);
+    }
+    public void EnemyDeadSound()
+    {
+        audioSource.clip = enemyDead;
+        audioSource.PlayOneShot(enemyDead);
     }
 }

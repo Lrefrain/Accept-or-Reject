@@ -33,12 +33,5 @@ public class GameManager : MonoBehaviour
         // timeBar.text = string.Format("Time:{0:F2}s", Time.time);
         timeBar.gameObject.SetActive(false);
     }
-    // private void ChoiceTimer()
-    // {
-    //     float dt = CD - (Time.time - lastTime);
-    //     if (dt < 0) {
-    //         lastTime = Time.time;
-    //         // tools.StartChoice();
-    //     }
-    // }
+
 }

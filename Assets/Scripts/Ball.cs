@@ -10,11 +10,13 @@ public class Ball : MonoBehaviour
     private Vector3 moveDirection, firstDirection;
     private UseTools useTools;
     private Player player;
+    private Enemy enemy;
     private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
+        enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
         firstDirection = (player.transform.position - transform.position).normalized;
         useTools = Camera.main.GetComponent<UseTools>();
         audioManager = Camera.main.GetComponent<AudioManager>();
@@ -23,6 +25,16 @@ public class Ball : MonoBehaviour
     void Shake()
     {
         Camera.main.GetComponent<ShakeScreen>().StartShake();
+    }
+
+    void Blink()
+    {
+        player.gameObject.GetComponent<Bling>().DamagePlayer();
+    }
+
+    void BlinkEnemy()
+    {
+        enemy.gameObject.GetComponent<BlingEnemy>().DamagePlayer();
     }
 
     // Update is called once per frame
@@ -73,7 +85,9 @@ public class Ball : MonoBehaviour
     {
         if (heroOrEnemy == 1 && other.gameObject.CompareTag("Hero")){
             audioManager.ExploreSound();
-            Invoke("Shake", 0.2f);
+            // Invoke("Shake", 0.2f);
+            Shake();
+            Blink();
             useTools.ClearScreen();
             other.gameObject.GetComponent<Player>().HP --;
             other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);
@@ -82,7 +96,9 @@ public class Ball : MonoBehaviour
 
         if (heroOrEnemy == 0 && other.gameObject.CompareTag("Shizuka")) {
             audioManager.ExploreSound();
-            Invoke("Shake", 0.2f);
+            // Invoke("Shake", 0.2f);
+            Shake();
+            Blink();
             useTools.ClearScreen();
             player.HP --;
             player.HP = Mathf.Max(0, player.HP);
@@ -90,6 +106,7 @@ public class Ball : MonoBehaviour
         }
 
         if (heroOrEnemy == 0 && other.gameObject.CompareTag("Enemy")){
+            BlinkEnemy();
             audioManager.ExploreSound();
             other.gameObject.GetComponent<Enemy>().HP --;
             other.gameObject.GetComponent<Enemy>().HP = Mathf.Max(0, other.gameObject.GetComponent<Enemy>().HP);

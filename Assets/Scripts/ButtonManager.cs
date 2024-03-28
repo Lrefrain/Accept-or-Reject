@@ -18,7 +18,22 @@ public class ButtonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckRestart();
+        CheckPause();
+    }
+    
+    void CheckRestart() 
+    {
+        if (Input.GetKeyDown(KeyCode.F1)) {
+            RestartClick();
+        }
+    }
 
+    void CheckPause()
+    {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            PauseClick();
+        }
     }
 
     public void AcceptClick()

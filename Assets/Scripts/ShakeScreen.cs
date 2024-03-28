@@ -12,7 +12,7 @@ public class ShakeScreen : MonoBehaviour
     {
         if (shakeTimer > 0)
         {
-            Debug.Log("Shaker: " + shakeTimer.ToString());
+            Camera.main.backgroundColor = new Color(1f, 0f, 0f);
             Vector3 shakeOffset = Random.insideUnitSphere * shakeMagnitude;
             Camera.main.transform.localPosition = shakeOffset;
 
@@ -21,6 +21,7 @@ public class ShakeScreen : MonoBehaviour
         }
         else
         {
+            Camera.main.backgroundColor = new Color(0f, 0f, 0f);
             shakeTimer = 0f;
             Camera.main.transform.localPosition = new Vector3(0f, 0f, -10f);
         }
