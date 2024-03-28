@@ -7,9 +7,12 @@ public class CurtainMove : MonoBehaviour
 
     public bool curtainUp = false, curtainDown = false;
     private float curtainSpeed = 200f;
-    private float startY = 197f, endY = 12f;
+    private float startY, endY;
+    private CameraSupport cs;
     void Start()
     {
+        cs = Camera.main.GetComponent<CameraSupport>();
+        GetBounds();
     }
     // Update is called once per frame
     void Update()
@@ -21,7 +24,18 @@ public class CurtainMove : MonoBehaviour
             CurtainDown();
         }
     }
-
+    private void GetBounds()
+    {
+        float ly, sy;
+        // lx = cs.GetWorldBound().min.x;
+        ly = cs.GetWorldBound().min.y;
+        // rx = cs.GetWorldBound().max.x;
+        // ry = cs.GetWorldBound().max.y;
+        // sx = cs.GetWorldBound().size.x
+        sy = cs.GetWorldBound().size.y;
+        startY = ly + 1.3f * sy;
+        endY = ly + 0.6f * sy;
+    }
     private void CurtainUp()
     {
         Vector3 pos = transform.position;
