@@ -410,7 +410,7 @@ Transform:
   m_GameObject: {fileID: 106810444}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 200, z: -2.3666668}
+  m_LocalPosition: {x: 0, y: 26, z: -2.3666668}
   m_LocalScale: {x: 15, y: 15, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -662,10 +662,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHp: {fileID: 515240467}
-  reject: {fileID: 0}
-  accept: {fileID: 0}
-  confirm: {fileID: 0}
-  text: {fileID: 0}
+  reject: {fileID: 1959773812}
+  accept: {fileID: 175857912}
+  confirm: {fileID: 169580869}
+  text: {fileID: 856394905}
 --- !u!1 &169580869
 GameObject:
   m_ObjectHideFlags: 0

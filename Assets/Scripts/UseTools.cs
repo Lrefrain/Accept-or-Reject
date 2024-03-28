@@ -14,9 +14,11 @@ public class UseTools : MonoBehaviour
     public float delaySeconds; // buff/debuff 延迟时间
     public GameObject[] toolsPrefab;
     public GameObject[] toolsInstant;
+    private CameraSupport cs;
     // Start is called before the first frame update
     void Start()
     {
+        cs = Camera.main.GetComponent<CameraSupport>();
         delaySeconds = 10f;
         player = GameObject.Find("Player").GetComponent<Player>();
         SetSpeedForBegin();
@@ -37,10 +39,11 @@ public class UseTools : MonoBehaviour
 
         for (int i = 0; i < 9; ++i) {
             toolsPrefab[i] = Resources.Load<GameObject>("Tools/Tool" + i.ToString());
-            toolsInstant[i] = Instantiate(toolsPrefab[i], transform.position, Quaternion.identity);
-            Vector3 p = toolsInstant[i].transform.localPosition;
-            p.z = -5f;
-            toolsInstant[i].transform.localPosition = p;
+            toolsInstant[i] = Instantiate(toolsPrefab[i]);
+            // toolsInstant[i] = Instantiate(toolsPrefab[i], transform.position, Quaternion.identity);
+            // Vector3 p = toolsInstant[i].transform.localPosition;
+            // p.z = -5f;
+            // toolsInstant[i].transform.localPosition = p;
             toolsInstant[i].SetActive(false);
         }
         
@@ -56,7 +59,17 @@ public class UseTools : MonoBehaviour
         //     tag = true;
         // }
     }
+    private void GetBounds()
+    {
+        // lx = cs.GetWorldBound().min.x;
+        // ly = cs.GetWorldBound().min.y;
+        // rx = cs.GetWorldBound().max.x;
+        // ry = cs.GetWorldBound().max.y;
 
+        // sx = cs.GetWorldBound().size.x;
+        // sy = cs.GetWorldBound().size.y;
+
+    }
     public void GoWork(int id)
     {
         Debug.Log("work" + id);

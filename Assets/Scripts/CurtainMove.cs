@@ -35,6 +35,7 @@ public class CurtainMove : MonoBehaviour
         sy = cs.GetWorldBound().size.y;
         startY = ly + 1.3f * sy;
         endY = ly + 0.6f * sy;
+        transform.position = new Vector3(transform.position.x, startY, transform.position.z);
     }
     private void CurtainUp()
     {

@@ -31,7 +31,7 @@ public class UIControl : MonoBehaviour
     }
     private void TextPosition()
     {
-        float y = ly + 0.35f * sy;
+        float y = ly + 0.3f * sy;
         text.transform.position = new Vector3(0f, y, text.transform.position.z);
     }
     private void EnemyHpPosition()

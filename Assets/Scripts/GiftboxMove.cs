@@ -39,6 +39,8 @@ public class GiftboxMove : MonoBehaviour
         sy = cs.GetWorldBound().size.y;
         boxbeginY = ly + 1.3f * sy;
         boxendY = ly + 0.6f * sy;
+        transform.position = new Vector3(0f, boxbeginY, transform.position.z);
+        // Time.timeScale = 0;
     }
     // Update is called once per frame
     void Update()
@@ -50,12 +52,12 @@ public class GiftboxMove : MonoBehaviour
         switch (boxState) {
             case 0: // box prepare...
                 timer -= Time.smoothDeltaTime;
-                toolBar.text = string.Format("Tool:{0:F2}s", timer);
                 // Debug.Log(timer);
                 if (timer <= 0) {
                     boxState = 1;
                     timer = 0;
                 }
+                toolBar.text = string.Format("Tool:{0:F2}s", timer);
                 break;
             case 1: // box down
                 useTools.StopAll();
