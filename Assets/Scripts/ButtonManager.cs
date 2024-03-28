@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
     private AudioManager audioManager;
     private Tools tools;
-
+    private bool hasPause = false;
 
     void Start()
     {
@@ -36,5 +37,18 @@ public class ButtonManager : MonoBehaviour
     {
         audioManager.ClickSound();
         tools.ApplyTool("Confirm");
+    }
+    public void PauseClick()
+    {
+        audioManager.ClickSound();
+        if (hasPause) Time.timeScale = 1;
+        else Time.timeScale = 0;
+        hasPause = !hasPause;
+    }
+    public void RestartClick()
+    {
+        audioManager.ClickSound();
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }

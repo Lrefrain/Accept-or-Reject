@@ -20,19 +20,6 @@ public class ButtonConfirm : MonoBehaviour
             ConfirmClick();
         }
     }
-
-    public void AcceptClick()
-    {
-        audioManager.ClickSound();
-        tools.ApplyTool("Accept");
-    }
-
-    public void RejectClick()
-    {
-        audioManager.ClickSound();
-        tools.ApplyTool("Reject");
-    }
-
     public void ConfirmClick()
     {
         audioManager.ClickSound();

@@ -20,6 +20,11 @@ public class Ball : MonoBehaviour
         audioManager = Camera.main.GetComponent<AudioManager>();
     }
 
+    void Shake()
+    {
+        Camera.main.GetComponent<ShakeScreen>().StartShake();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -67,16 +72,18 @@ public class Ball : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) 
     {
         if (heroOrEnemy == 1 && other.gameObject.CompareTag("Hero")){
-            useTools.ClearScreen();
             audioManager.ExploreSound();
+            Invoke("Shake", 0.2f);
+            useTools.ClearScreen();
             other.gameObject.GetComponent<Player>().HP --;
             other.gameObject.GetComponent<Player>().HP = Mathf.Max(0, other.gameObject.GetComponent<Player>().HP);
             Destroy(gameObject);
         }
 
         if (heroOrEnemy == 0 && other.gameObject.CompareTag("Shizuka")) {
-            useTools.ClearScreen();
             audioManager.ExploreSound();
+            Invoke("Shake", 0.2f);
+            useTools.ClearScreen();
             player.HP --;
             player.HP = Mathf.Max(0, player.HP);
             Destroy(gameObject);

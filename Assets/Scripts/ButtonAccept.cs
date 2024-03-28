@@ -26,16 +26,4 @@ public class ButtonAccept : MonoBehaviour
         audioManager.ClickSound();
         tools.ApplyTool("Accept");
     }
-
-    public void RejectClick()
-    {
-        audioManager.ClickSound();
-        tools.ApplyTool("Reject");
-    }
-
-    public void ConfirmClick()
-    {
-        audioManager.ClickSound();
-        tools.ApplyTool("Confirm");
-    }
 }
