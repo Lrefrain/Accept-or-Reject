@@ -181,11 +181,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 4beb055f07aaff244873dec698d0363e, type: 3}
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -193,7 +193,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F60\u6389\u8FDB\u54C6\u5566A\u68A6\u7684\u53E3\u888B\u91CC\uFF0C\u5FEB\u5229\u7528\u53E3\u888B\u91CC\u7684\u968F\u673A\u9053\u5177\u6253\u8D25\u80D6\u864E\u9003\u51FA\u53BB\u5427\uFF01\nwasd\uFF1A\u89D2\u8272\u79FB\u52A8\nspace/\u9F20\u6807\u5DE6\u952E\uFF1A\u53D1\u5C04"
+  m_Text: "\u4F60\u6389\u8FDB\u54C6\u5566A\u68A6\u7684\u53E3\u888B\u91CC\uFF0C\u5FEB\u5229\u7528\u53E3\u888B\u91CC\u7684\u968F\u673A\u9053\u5177(\u53EF\u80FD\u4E0D\u5229\u54E6)\u6253\u8D25\u80D6\u864E\u9003\u51FA\u53BB\u5427!\n\n\nWASD:\u79FB\u52A8\nSpace/Left
+    Mouse:\u53D1\u5C04\nJ:\u63A5\u53D7\u9053\u5177/\u786E\u8BA4\u9053\u5177\nK:\u62D2\u7EDD\u9053\u5177\nP:\u6682\u505C\nR:\u91CD\u65B0\u6311\u6218"
 --- !u!222 &288266209
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -696,6 +697,26 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -18
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200000, guid: 7461a7b0cf97947fd9b9e4502fd2d07b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 291c0c140c934164b88abe1f429ad58b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -924,7 +945,6 @@ GameObject:
   - component: {fileID: 1347265874}
   - component: {fileID: 1347265876}
   - component: {fileID: 1347265875}
-  - component: {fileID: 1347265877}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -994,18 +1014,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347265873}
   m_CullTransparentMesh: 0
---- !u!114 &1347265877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347265873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95e0a044abfc473394c6c61eb343e4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1407916756
 GameObject:
   m_ObjectHideFlags: 0

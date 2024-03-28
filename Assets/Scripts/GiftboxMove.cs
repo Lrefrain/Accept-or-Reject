@@ -9,21 +9,36 @@ public class GiftboxMove : MonoBehaviour
     public bool boxUp = false;
     private float timer, boxAppearPeriod = 7f;
     private int boxState = 0;
-    private float boxbeginY = 200f, boxendY = 15f, boxSpeed = 200f;
+    private float boxbeginY, boxendY, boxSpeed = 200f;
     private UseTools useTools;
     private Tools tools;
     private CurtainMove curtainMove;
     public Text toolBar;
+    private CameraSupport cs;
     // public AudioClip boxClip;
     // private AudioSource audioSource;
     // public AudioSource bgm;
     void Start()
     {
+        cs = Camera.main.GetComponent<CameraSupport>();
+        GetBounds();
         ResetBox();
         useTools = Camera.main.GetComponent<UseTools>();
         tools = Camera.main.GetComponent<Tools>();
         curtainMove = GameObject.Find("Curtain").GetComponent<CurtainMove>();
         // audioSource = GetComponent<AudioSource>();
+    }
+    private void GetBounds()
+    {
+        float ly, sy;
+        // lx = cs.GetWorldBound().min.x;
+        ly = cs.GetWorldBound().min.y;
+        // rx = cs.GetWorldBound().max.x;
+        // ry = cs.GetWorldBound().max.y;
+        // sx = cs.GetWorldBound().size.x;
+        sy = cs.GetWorldBound().size.y;
+        boxbeginY = ly + 1.3f * sy;
+        boxendY = ly + 0.6f * sy;
     }
     // Update is called once per frame
     void Update()
@@ -39,6 +54,7 @@ public class GiftboxMove : MonoBehaviour
                 // Debug.Log(timer);
                 if (timer <= 0) {
                     boxState = 1;
+                    timer = 0;
                 }
                 break;
             case 1: // box down
