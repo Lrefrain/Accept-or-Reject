@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateTimeBar()
     {
-        timeBar.text = string.Format("Time:{0:F2}s", Time.time);
+        // timeBar.text = string.Format("Time:{0:F2}s", Time.time);
+        timeBar.gameObject.SetActive(false);
     }
     // private void ChoiceTimer()
     // {

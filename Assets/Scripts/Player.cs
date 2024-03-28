@@ -86,20 +86,18 @@ public class Player : MonoBehaviour
     {
         if (Time.time - lastShootTime > GetShootCD() && enableShoot) {
             // cdBar.text = "Ball:Ready";
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.J)){
                 lastShootTime = Time.time;
                 // CDManagerBar
                 cdManager.lst = Time.time;
                 cdManager.image.fillAmount = 0f;
                 cdManager.shootCD = GetShootCD();
 
-                Debug.Log(useTools.bulletsNum);
                 for (int i = 0; i < useTools.bulletsNum; ++i) {
                     GameObject bullet = Instantiate(ballPrefab, transform.position, Quaternion.identity);
                     bullet.GetComponent<Ball>().heroOrEnemy = 0;     // mark as a hero bullet
                     bullet.GetComponent<Ball>().oth = i;            // mark its dir index
                     bullet.transform.localScale *= 0.7f;
-                    Debug.Log(i);
                 }
 
                 if (useTools.heroHasStar) {
