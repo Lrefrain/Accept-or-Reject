@@ -8,18 +8,15 @@ public class Tools : MonoBehaviour
     // public GameObject chooseAnim, curtain;
     // public GameObject happyAmon, annoyedAmon;
     private int id;
-    private UseTools useTools;
+    private bool tag = false;
+    public UseTools useTools;
     private CurtainMove curtainMove;
     private GiftboxMove boxMove;
-    public GameObject[] toolsPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        toolsPrefab = new GameObject[10];
-        // toolsPrefab[4] = GameObject.Find("Tool4");
-
         DisableAll();
-        useTools = Camera.main.GetComponent<UseTools>();
+        // useTools = gameObject.GetComponent<UseTools>();
         curtainMove = GameObject.Find("Curtain").GetComponent<CurtainMove>();
         boxMove = GameObject.Find("ChooseAnim").GetComponent<GiftboxMove>();
     }
@@ -45,8 +42,11 @@ public class Tools : MonoBehaviour
         // curtain.SetActive(false);
         // chooseAnim.SetActive(false);
         text.SetActive(false);
-        // Debug.Log(id);
-        // useTools.ddddd.SetActive(false);
+        if (tag == false) {
+            tag = true;
+            return ;
+        }
+        useTools.toolsInstant[id].SetActive(false);
     }
     public void ApplyTool(string choice)
     {

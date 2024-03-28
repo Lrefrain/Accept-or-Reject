@@ -14,7 +14,6 @@ public class UseTools : MonoBehaviour
     public float delaySeconds; // buff/debuff 延迟时间
     public GameObject[] toolsPrefab;
     public GameObject[] toolsInstant;
-    public GameObject ddddd;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,21 +23,27 @@ public class UseTools : MonoBehaviour
         SetBulletForBegin();
         SetShootCDForBegin();
         descriptions = new string[10];
+        toolsPrefab = new GameObject[10];
         toolsInstant = new GameObject[10];
         descriptions[0] = "The World!";
         descriptions[1] = "Get Star Bullet!";
         descriptions[2] = "Get Lower Shoot CD!";
         descriptions[3] = "Get Higher Shoot CD!";
-        // -----------------------------------
-        // toolsPrefab[4] = Resources.Load<GameObject>("Tools/Tool4");
-        // ddddd = Instantiate(toolsPrefab[4], transform.position, Quaternion.identity);
-        // ddddd.SetActive(false);
         descriptions[4] = "Increase HP by 1!";
-        // -----------------------------------
         descriptions[5] = "Decrease HP by 1!\n(if your HP > 1)";
         descriptions[6] = "Clear Screen!";
         descriptions[7] = "Add Shizuka!\n(DO NOT touch her)";
         descriptions[8] = "Multi-Bullets!";
+
+        for (int i = 0; i < 9; ++i) {
+            toolsPrefab[i] = Resources.Load<GameObject>("Tools/Tool" + i.ToString());
+            toolsInstant[i] = Instantiate(toolsPrefab[i], transform.position, Quaternion.identity);
+            Vector3 p = toolsInstant[i].transform.localPosition;
+            p.z = -5f;
+            toolsInstant[i].transform.localPosition = p;
+            toolsInstant[i].SetActive(false);
+        }
+        
         text = textObj.GetComponent<Text>();
     }
 
@@ -91,7 +96,7 @@ public class UseTools : MonoBehaviour
     {
         textObj.SetActive(true);
         text.text = descriptions[id];
-        // ddddd.SetActive(true);
+        toolsInstant[id].SetActive(true);
     }
 
     public float enemyBallSpeed = 200f;

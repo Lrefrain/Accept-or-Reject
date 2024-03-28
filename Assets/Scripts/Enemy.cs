@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         slider.value = (float)HP / (float)MaxHP;
-        Debug.Log(slider.value);
         speed = useTools.enemySpeed;
         enableShoot = useTools.enemyEnableShoot;
         ShootControl();

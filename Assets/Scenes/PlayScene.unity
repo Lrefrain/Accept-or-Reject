@@ -1167,7 +1167,7 @@ MonoBehaviour:
   confirmButton: {fileID: 169580869}
   chooseAnim: {fileID: 106810444}
   text: {fileID: 856394905}
-  toolsPrefab: []
+  useTools: {fileID: 268816705}
 --- !u!114 &268816705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1185,7 +1185,6 @@ MonoBehaviour:
   delaySeconds: 8
   toolsPrefab: []
   toolsInstant: []
-  ddddd: {fileID: 0}
   enemyBallSpeed: 300
   heroBallSpeed: 300
   enemyStarSpeed: 150
