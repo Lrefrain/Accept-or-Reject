@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     private float leftX, rightX, lowY, upY;
     private float minRate = 0.05f, maxRate = 0.4f;
     private CameraSupport s;
-    private float eps = 1e-1f;
+    private float eps = 1f;
     private UseTools useTools;
     private float lastShootBallTime;
     private float lastShootStarTime;
